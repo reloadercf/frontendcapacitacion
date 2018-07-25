@@ -1,8 +1,9 @@
 import React from 'react'
 import {Button, Modal} from 'antd';
-import VideoPage from '../VideoPage/VideoPage';
+import {Link} from 'react-router-dom';
 
-export const ContenidoCard = ({id, title, video, modal2Visible, handleClose, handleOpen}) => {
+
+export const ContenidoCard = ({id, title, id_tema, id_modulo}) => {
 
     return (
         <div className="div-subtema">
@@ -16,20 +17,14 @@ export const ContenidoCard = ({id, title, video, modal2Visible, handleClose, han
                 }}
                     type="primary"
                     icon="search">Examen</Button>
-                <Button type="primary" icon="search" onClick={handleOpen}>Video</Button>
+               
+                <Link to={`/modulo${id_modulo}/tema${id_tema}/video${id}`}> 
+                    <Button type="primary" icon="search">Video</Button>
+                </Link>
 
-                <Modal
-                    title="Vertically centered modal dialog"
-                    width={700}
-                    wrapClassName="vertical-center-modal"
-                    visible={modal2Visible}
-                    onOk={handleClose}
-                    onCancel={handleClose}>           
-                    <VideoPage video={video} modal2Visible={modal2Visible} />
-
-                </Modal>
+           
             </div>
 
         </div>
     )
-}
+} 

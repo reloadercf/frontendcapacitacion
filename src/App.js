@@ -6,18 +6,45 @@ import { FooterSection } from './components/footer/FooterSection';
 import { HeaderSection } from './components/header/HeaderSection';
 import Routes from './Routes';
 
+
 const { Header, Content, Footer } = Layout;
 
 
 class App extends Component {
 
   state={
+    
     modulos:[
         {
             'id':1,
             'temas':[
               {
                 'id':1,
+                'title':'ADMINISTRACION DEL TIEMPO',
+                'subtemas':[
+                  {
+                    'id':1,
+                    'title':'subtema 1 administracion del tiempo',
+                    'objetivo':'Comprender los conceptos basicos de la contabilidad',
+                    'video':'https://youtu.be/ilw-qmqZ5zY'
+                  },
+                  {
+                    'id':2,
+                    'title':'Subtema 2 administracion del tiempo',
+                    'objetivo':'Comprender los conceptos basicos de la contabilidad',
+                    'video':'https://youtu.be/ilw-qmqZ5zY'
+                  },
+                  {
+                    'id':3,
+                    'title':'Subtema 3 administracion del tiempo',
+                    'objetivo':'Comprender los conceptos basicos de la contabilidad',
+                    'video':'https://youtu.be/hT_nvWreIhg'
+                  }
+                ]
+
+              },
+              {
+                'id':2,
                 'title':'CONTABILIDAD',
                 'subtemas':[
                   {
@@ -28,13 +55,38 @@ class App extends Component {
                   },
                   {
                     'id':2,
-                    'title':'¿Qué es la contabilidad?',
+                    'title':'¿Como se lleva la contabilidad?',
                     'objetivo':'Comprender los conceptos basicos de la contabilidad',
                     'video':'https://youtu.be/ilw-qmqZ5zY'
                   },
                   {
                     'id':3,
-                    'title':'¿Qué es la contabilidad?',
+                    'title':'¿Impuetos?',
+                    'objetivo':'Comprender los conceptos basicos de la contabilidad',
+                    'video':'https://youtu.be/hT_nvWreIhg'
+                  }
+                ]
+
+              },
+              {
+                'id':3,
+                'title':'AUTOESTIMA PROFESIONAL',
+                'subtemas':[
+                  {
+                    'id':1,
+                    'title':'Subtema 1 Autoestima profesional',
+                    'objetivo':'Comprender los conceptos basicos de la contabilidad',
+                    'video':'https://youtu.be/ilw-qmqZ5zY'
+                  },
+                  {
+                    'id':2,
+                    'title':'Subtema 2 Autoestima profesional',
+                    'objetivo':'Comprender los conceptos basicos de la contabilidad',
+                    'video':'https://youtu.be/ilw-qmqZ5zY'
+                  },
+                  {
+                    'id':3,
+                    'title':'Subtema 3 Autoestima profesional',
                     'objetivo':'Comprender los conceptos basicos de la contabilidad',
                     'video':'https://youtu.be/hT_nvWreIhg'
                   }
@@ -105,23 +157,24 @@ class App extends Component {
           'descripcion': 'En este modulo aprenderas Loos conceptos basicos de Contabilidad, Administracion del tiempo y Autoestima Profesional',
           'objetivo':"Despues de terminar este curso el asesor sera capaz de dominar....",
           'autor': "Carlos Fernando Mendoza",        
-      },       
-    ]
+      },          
+    ],
+    logged:false
 }
 
 
   render() {
-      let {modulos}=this.state
+      let {modulos, logged}=this.state
     return (
       <Layout>
-        <NavMenu/>
+        <NavMenu logged={logged}/>
         
       <Layout className="layout-videos">
         <Header style={{ background: '#fff', padding: 0 }} >
             <HeaderSection/>
         </Header>
         <Content style={{ margin: '24px 16px 0',  }}>
-            <Routes modulos={modulos}/>
+            <Routes modulos={modulos} logged={logged}/>
         </Content>
         <Footer >
            <FooterSection/>

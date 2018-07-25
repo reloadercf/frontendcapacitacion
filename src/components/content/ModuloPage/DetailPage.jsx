@@ -7,7 +7,8 @@ import { Contenido } from './Contenido';
 class DetailPage extends Component {
 
     state={
-        modulo:{}
+        modulo:{},
+        id_modulo:this.props.match.params.modulo_id
     }
     componentWillMount(){
         this.getOrden()
@@ -20,11 +21,12 @@ class DetailPage extends Component {
         })
         this.setState({modulo:modulodetail[0]})
         console.log(modulodetail)
-        console.log(this.state.modulo)
-
+        console.log(this.state.modulo)  
+      
     }
     render() {
-        let{modulo}=this.state
+        let{modulo,id_modulo}=this.state
+      
         return (
             <div>
                 <Row type="flex" justify="start">
@@ -34,7 +36,7 @@ class DetailPage extends Component {
                 </Row>
                 <Row type="flex" justify="center" >
                     <Col lg={20} md={20} xs={24}>
-                        <Contenido modulo={modulo}/>
+                        <Contenido modulo={modulo} id_modulo={id_modulo}/>
                     </Col>
                 
                 </Row>

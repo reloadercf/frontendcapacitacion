@@ -16,7 +16,6 @@ export class Contenido extends Component {
   state = {
     temas: [],
     subtemas: [],
-    modal2Visible: false,
   }
 
   componentWillMount() {
@@ -27,21 +26,11 @@ export class Contenido extends Component {
   gettemas = () => {
     this.setState({temas: this.props.modulo.temas})
   }
-
-
-  handleOpen=()=>{
-    this.setState({ modal2Visible:true });
-  } 
- 
-  handleClose=()=>{
-    this.setState({ modal2Visible:false });
-  } 
-
-
   
 
   render() {
-     let {temas, modal2Visible}=this.state
+     let {temas}=this.state
+     let {id_modulo}=this.props
     return (
       <Collapse
         bordered={false}
@@ -55,7 +44,7 @@ export class Contenido extends Component {
             {temas.map((i, key)=>(
                 <Panel header={i.title}  key={key} style={customPanelStyle} >               
                     {i.subtemas.map((c, key)=>(             
-                      <ContenidoCard {...c} key={key} modal2Visible={modal2Visible} handleOpen={this.handleOpen} handleClose={this.handleClose}/>             
+                      <ContenidoCard {...c}  id_tema={i.id} id_modulo={id_modulo} key={key}/>             
                     ))}                
                 </Panel>
             ))}    

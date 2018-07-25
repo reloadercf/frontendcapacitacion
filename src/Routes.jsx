@@ -1,20 +1,22 @@
 import React from 'react'
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import ProfilePage from './components/content/ProfilePage/ProfilePage';
 import DetailPage from './components/content/ModuloPage/DetailPage';
-import VideoPage from './components/content/VideoPage/VideoPage';
+import {VideoPage} from './components/content/VideoPage/VideoPage';
+
+import LogUserPage from './components/navbar/LogUserPage';
 
 
-class Routes extends React.Component{
-    
+class Routes extends React.Component{ 
     render(){
-          let {modulos} = this.props;
+          let {modulos, logged} = this.props;
         return(
             <Switch>
-                <Route exact path="/"  render={props => (<ProfilePage {...props} modulos={modulos}/>)}  />         
-                <Route exact path="/detail/:modulo_id"  render={props => (<DetailPage {...props} modulos={modulos}/>)} /> 
-                <Route exact path="/video"  render={props => (<VideoPage {...props} modulos={modulos}/>)} /> 
-                           
+           
+                <Route exact path="/"  render={props => (<ProfilePage {...props} modulos={modulos}/>)}  />    
+                <Route path="/login" render={props =>(logged?<Redirect to="/" />:<LogUserPage {...props}/>)}/>     
+                <Route exact path="/modulo:modulo_id"  render={props => (<DetailPage {...props} modulos={modulos}/>)} /> 
+                <Route exact path="/modulo:modulo_id/tema:tema_id/video:video_id"  render={props => (<VideoPage {...props} modulos={modulos}/>)} />                
             </Switch>
         )
     }

@@ -2,9 +2,23 @@
 @import './components/content/ModuloPage/ModuloPage.css';
 
 
+
+ .login-form {
+  max-width: 300px;
+}
+.login-form-forgot {
+  float: right;
+}
+  .login-form-button {
+  width: 100%;
+}
+
+
 .App {
   text-align: center;
 }
+
+
 .layout-videos{
   margin-left: 200px;
 }

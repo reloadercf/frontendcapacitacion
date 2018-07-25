@@ -10,8 +10,8 @@ export const ModulosComponent = ({id, temas, descripcion, objetivo, autor}) => {
         <div style={{width:"200px"}}>
           <p>Descripcion: {descripcion}</p>
           <p>Objetivos: {objetivo}</p>
-          <Link to={`/detail/${id}`}> 
-          <Button type="primary">Iniciar Curso</Button>
+          <Link to={`/modulo${id}`}> 
+            <Button type="primary">Iniciar Curso</Button>
          </Link>
         </div>
       );
