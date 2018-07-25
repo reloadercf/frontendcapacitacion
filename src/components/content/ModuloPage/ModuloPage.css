@@ -6,3 +6,27 @@
 .div-que-aprendere{
     margin-top: 3em;
 }
+.div-subtema{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 2em;
+}
+.div-subtema .info-subtema{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center
+}
+
+.vertical-center-modal:before {
+    content: '';
+    display: inline-block;
+    height: auto;
+    vertical-align: middle;
+    width: 0;
+  }
+  

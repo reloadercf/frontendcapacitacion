@@ -6,6 +6,8 @@ import { Buscador } from './Buscador';
 
 class ProfilePage extends Component {
     render() {
+
+        let {modulos}=this.props
         return (
             <div>
                 <Row type="flex" justify="start">
@@ -18,7 +20,7 @@ class ProfilePage extends Component {
                         <Buscador/>              
                     </Col>
                     <Col lg={24} md={24}>
-                        <ModulosList/>
+                        <ModulosList modulos={modulos}/>
                     </Col>
                 </Row>
             </div>

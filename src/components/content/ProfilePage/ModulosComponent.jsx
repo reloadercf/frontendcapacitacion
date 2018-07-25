@@ -1,24 +1,31 @@
 import React from 'react'
-import {Card, Icon, Popover, message} from 'antd';
-const {Meta} = Card;
+import {Card,Popover,Button} from 'antd';
+import dipra from '../../../dipra.png';
+import {Link} from 'react-router-dom';
 
-export const ModulosComponent = () => {
+
+export const ModulosComponent = ({id, temas, descripcion, objetivo, autor}) => {
 
     const content = (
-        <div>
-          <p>Content</p>
-          <p>Content</p>
+        <div style={{width:"200px"}}>
+          <p>Descripcion: {descripcion}</p>
+          <p>Objetivos: {objetivo}</p>
+          <Link to={`/detail/${id}`}> 
+          <Button type="primary">Iniciar Curso</Button>
+         </Link>
         </div>
       );
     return (
-        <Popover  placement="right"  content={content} title="Titulo del modulo">
+        <Popover  placement="right"  content={content} title={`MODULO: ${id}`}>
         <Card
-            cover={< img alt = "example" src = "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
-            actions={[ < Icon type = "setting" />, < Icon type = "edit" />, < Icon type = "ellipsis" />
-        ]}>
+            style={{textAlign:"center"}}
+          >
             <div>
-                <h4>Titulo del modulo</h4>
-                <span>Descripcion del modulo</span>
+                <div>
+                    <img alt = "example" src = {dipra} style={{width:"100%"}}/> 
+                </div>
+                <h3>{`MODULO: ${id}`}</h3>
+                <p>{autor}</p>
             </div>
         </Card>
         </Popover>

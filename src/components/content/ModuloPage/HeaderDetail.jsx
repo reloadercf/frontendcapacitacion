@@ -1,14 +1,14 @@
 import React from 'react'
 import {Card} from 'antd';
 import {Row, Col} from 'antd';
-export const HeaderDetail = () => {
+export const HeaderDetail = ({modulo}) => {
     return (
 
         <div className="header-detail">
             <Card >
                 <div>
-                    <h1>Nombre del curso 1</h1>
-                    <span>tus conocimientos y potencializar tus ventas</span>
+                    <h1>MODULO {modulo.id}</h1>
+                    <span>{modulo.descripcion}</span>
                 </div>
             </Card>
 
@@ -22,11 +22,11 @@ export const HeaderDetail = () => {
                                 <Row type="flex" justify="space-around">
                                     <Col lg={12} md={12} xs={24}>
                                         <div>
-                                            sdasdasd
+                                            {modulo.objetivo}
                                         </div>
                                     </Col>
                                     <Col lg={12} md={12} xs={24}>
-                                        <div>asdasd</div>
+                                        <div> {modulo.objetivo}</div>
                                     </Col>
                                 </Row>
 
@@ -38,8 +38,7 @@ export const HeaderDetail = () => {
                 <Col lg={6} md={6} xs={24} span={16}>
                     <div className="div-imagen-modulo">
                         <img
-                            src="https://images.pexels.com/photos/8700/wall-animal-dog-pet.jpg?auto=compress&cs=tinysrgb&h=350"
-                            alt=""/>
+                            src="https://images.pexels.com/photos/8700/wall-animal-dog-pet.jpg?auto=compress&cs=tinysrgb&h=350" alt=""/>
                     </div>
 
                 </Col>
