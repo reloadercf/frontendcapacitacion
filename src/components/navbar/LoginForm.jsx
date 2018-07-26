@@ -6,23 +6,25 @@ const FormItem = Form.Item;
 class LoginForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
-        this
-            .props
-            .form
+        this.props.form
             .validateFields((err, values) => {
                 if (!err) {
                     console.log('Received values of form: ', values);
+                    this.props.logIn(values)
                 }
             });
     }
 
     render() {
+
+        let {email, password, logIn, handleText, user}=this.props
         const {getFieldDecorator} = this.props.form;
         return (
-           
-                <Form onSubmit={this.handleSubmit} className="login-form">
+            <div style={{background:"#FFFF", borderRadius:"3em", padding: "3em"}}>
+                <Form action="" onSubmit={this.handleSubmit} className="login-form">
+                    <h2 style={{textAlign:"center", letterSpacing:"3px", fontSize:"30px"}}>Iniciar Sesión</h2>
                     <FormItem>
-                        {getFieldDecorator('userName', {
+                        {getFieldDecorator('username', {
                             rules: [
                                 {
                                     required: true,
@@ -51,14 +53,15 @@ class LoginForm extends React.Component {
                         )}
                     </FormItem>
                     <FormItem>
-                       
+
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Log in
                         </Button>
-                     
+
                     </FormItem>
                 </Form>
 
+            </div>
 
         );
     }

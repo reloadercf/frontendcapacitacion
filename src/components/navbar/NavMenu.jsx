@@ -3,12 +3,12 @@ import {Layout, Menu, Icon} from 'antd';
 import {Link} from 'react-router-dom';
 const {Sider} = Layout;
 
-const Logged = ({logOut, handleCart}) => (
+const Logged = ({logOut}) => (
   <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
 
-    <Menu.Item key="6">
+    <Menu.Item key="6" onClick={logOut} >
       <Icon type="appstore-o"/>
-      <span className="nav-text">Cerrar Sesion</span>
+      <span className="nav-text" >Cerrar Sesion</span>
     </Menu.Item>
     <Menu.Item key="7">
       <Icon type="team"/>
@@ -53,7 +53,8 @@ class NavMenu extends Component {
       }}>
 
         <div className="logo"/> {logged
-          ? <Logged/>
+          ? <Logged 
+              logOut={this.props.logOut}/>
           : <Login/>}
       </Sider>
     );
