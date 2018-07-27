@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Icon, Input, Button, Checkbox} from 'antd';
+import {Form, Icon, Input, Button} from 'antd';
 
 const FormItem = Form.Item;
 
@@ -16,8 +16,6 @@ class LoginForm extends React.Component {
     }
 
     render() {
-
-        let {email, password, logIn, handleText, user}=this.props
         const {getFieldDecorator} = this.props.form;
         return (
             <div style={{background:"#FFFF", borderRadius:"3em", padding: "3em"}}>

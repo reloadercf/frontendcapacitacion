@@ -11,12 +11,16 @@ const Logged = ({logOut}) => (
       <span className="nav-text" >Cerrar Sesion</span>
     </Menu.Item>
     <Menu.Item key="7">
-      <Icon type="team"/>
-      <span className="nav-text">Mis cursos</span>
+      <Link to="/profile">
+        <Icon type="team"/>
+        <span className="nav-text">Modulos</span>
+      </Link>
     </Menu.Item>
     <Menu.Item key="8">
-      <Icon type="shop"/>
-      <span className="nav-text">Examenes</span>
+      <Link to="/examenes">
+        <Icon type="shop"/>
+        <span className="nav-text">Examenes</span>
+      </Link>
     </Menu.Item>
   </Menu>
 );

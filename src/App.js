@@ -24,21 +24,21 @@ class App extends Component {
                 'subtemas':[
                   {
                     'id':1,
-                    'title':'subtema 1 administracion del tiempo',
+                    'title':'Clase 1 administracion del tiempo',
                     'objetivo':'Comprender los conceptos basicos de la contabilidad',
-                    'video':'https://youtu.be/ilw-qmqZ5zY'
+                    'video':'https://youtu.be/xioZSo_WOo0'
                   },
                   {
                     'id':2,
-                    'title':'Subtema 2 administracion del tiempo',
+                    'title':'Clase 2 administracion del tiempo',
                     'objetivo':'Comprender los conceptos basicos de la contabilidad',
-                    'video':'https://youtu.be/ilw-qmqZ5zY'
+                    'video':'https://youtu.be/xioZSo_WOo0'
                   },
                   {
                     'id':3,
-                    'title':'Subtema 3 administracion del tiempo',
+                    'title':'Clase 3 administracion del tiempo',
                     'objetivo':'Comprender los conceptos basicos de la contabilidad',
-                    'video':'https://youtu.be/hT_nvWreIhg'
+                    'video':'https://youtu.be/xioZSo_WOo0'
                   }
                 ]
 
@@ -51,19 +51,19 @@ class App extends Component {
                     'id':1,
                     'title':'¿Qué es la contabilidad?',
                     'objetivo':'Comprender los conceptos basicos de la contabilidad',
-                    'video':'https://youtu.be/ilw-qmqZ5zY'
+                    'video':'https://youtu.be/xioZSo_WOo0'
                   },
                   {
                     'id':2,
                     'title':'¿Como se lleva la contabilidad?',
                     'objetivo':'Comprender los conceptos basicos de la contabilidad',
-                    'video':'https://youtu.be/ilw-qmqZ5zY'
+                    'video':'https://youtu.be/xioZSo_WOo0'
                   },
                   {
                     'id':3,
                     'title':'¿Impuetos?',
                     'objetivo':'Comprender los conceptos basicos de la contabilidad',
-                    'video':'https://youtu.be/hT_nvWreIhg'
+                    'video':'https://youtu.be/xioZSo_WOo0'
                   }
                 ]
 
@@ -166,8 +166,29 @@ class App extends Component {
 
 componentWillMount(){
   this.checkIfuser()
+  this.getmodulos()
 }
 
+getmodulos=()=>{
+
+    //const userToken = JSON.parse(localStorage.getItem('userRanchoToken'));
+    let url = "http://127.0.0.1:8000/apis/modulo/";
+    var request = new Request(url, {
+        method: 'GET',
+        headers: new Headers({'Content-Type': 'application/json'})
+    });
+    fetch(request)
+        .then(r => r.json())
+        .then(data => {
+            //this.setState({modulos: data})
+            console.log(data)
+
+        })
+        .catch(e => {
+            //console.log(e)
+        })
+
+}
 
 checkIfuser=()=>{
   let userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -225,13 +246,13 @@ logOut=()=>{
         <NavMenu logged={logged} logOut={this.logOut}/>
         
       <Layout className="layout-videos">
-        <Header style={{ background: '#fff', padding: 0 }} >
+        <Header style={{ background: '#fff', height:"100px", padding: 0 }} >
             <HeaderSection/>
         </Header>
         <Content style={{ margin: '24px 16px 0',  }}>
             <Routes modulos={modulos} logged={logged} logIn={this.logIn}/>
         </Content>
-        <Footer >
+        <Footer  style={{ height:"200px", padding: 0, marginTop:"20vh"}} >
            <FooterSection/>
         </Footer>
       </Layout>

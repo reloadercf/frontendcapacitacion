@@ -1,6 +1,8 @@
 import React from 'react'
 import {Card} from 'antd';
 import {Row, Col} from 'antd';
+import dipra from '../../../dipra.png';
+
 export const HeaderDetail = ({modulo}) => {
     return (
 
@@ -38,7 +40,7 @@ export const HeaderDetail = ({modulo}) => {
                 <Col lg={6} md={6} xs={24} span={16}>
                     <div className="div-imagen-modulo">
                         <img
-                            src="https://images.pexels.com/photos/8700/wall-animal-dog-pet.jpg?auto=compress&cs=tinysrgb&h=350" alt=""/>
+                            src={dipra}alt=""/>
                     </div>
 
                 </Col>
