@@ -18,7 +18,7 @@ class Routes extends React.Component{
                 <Route path="/profile" render={()=>(logged?<ProfilePage modulos={modulos}/>:<Redirect to="/"/>)}/> 
                 <Route exact path="/modulo:modulo_id" render={props=>(logged?<DetailPage {...props} modulos={modulos}/>:<Redirect to="/"/>)}/>  
                 <Route exact path="/modulo:modulo_id/tema:tema_id/video:video_id" render={props=>(logged?<VideoPage {...props} modulos={modulos} />:<Redirect to="/"/>)}/>    
-                <Route exact path="/modulo:modulo_id/tema:tema_id/examen:examen_id" render={props=>(logged?<ExamenPage {...props} modulos={modulos} />:<Redirect to="/"/>)}/>    
+                {/* <Route exact path="/modulo:modulo_id/tema:tema_id/examen:examen_id" render={props=>(logged?<ExamenPage {...props} modulos={modulos} />:<Redirect to="/"/>)}/>     */}
                                            
             </Switch>
         )

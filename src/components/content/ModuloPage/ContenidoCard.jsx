@@ -3,12 +3,12 @@ import {Button, Modal} from 'antd';
 import {Link} from 'react-router-dom';
 
 
-export const ContenidoCard = ({id, title, id_tema, id_modulo}) => {
+export const ContenidoCard = ({id, title_clase, id_tema, id_modulo}) => {
 
     return (
         <div className="div-subtema">
             <div className="info-subtema">
-                <h3>{id}: {title}</h3>
+                <h3>{id}: {title_clase}</h3>
             </div>
             <div>
                 <Button

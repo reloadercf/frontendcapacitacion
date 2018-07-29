@@ -6,26 +6,29 @@ import { Contenido } from './Contenido';
 
 class DetailPage extends Component {
 
-    state={
+state={
+        modulos:this.props.modulos,
         modulo:{},
         id_modulo:this.props.match.params.modulo_id
     }
     componentWillMount(){
-        this.getOrden()
+     this.getModulo()
     }
 
-    getOrden=()=>{
-        let modulos=this.props.modulos
+
+    getModulo=()=>{
+        let{modulos}=this.state
         let modulodetail=modulos.filter(p => {
-            return p.id == this.props.match.params.modulo_id;
+            return p.id == this.props.match.params.modulo_id    ;
         })
         this.setState({modulo:modulodetail[0]})
         console.log(modulodetail)
         console.log(this.state.modulo)  
+        console.log(modulos)
       
     }
     render() {
-        let{modulo,id_modulo}=this.state
+        let{modulo, id_modulo}=this.state
       
         return (
             <div>

@@ -8,6 +8,7 @@ import { VideosList } from './VideosList';
 export class VideoPage extends Component {
 
     state = {
+        modulos:[],
         modulo: {},
         temas:[],
         tema:{},
@@ -15,7 +16,7 @@ export class VideoPage extends Component {
     }
     componentWillMount() {
         this.getModulo()
-        //this.getTema()
+    
     }
     getModulo = () => {
         let modulos=this.props.modulos
@@ -23,27 +24,22 @@ export class VideoPage extends Component {
             return p.id == this.props.match.params.modulo_id;
         })
 
-        let tema_modulo=modulodetail[0].temas.filter(p => {
+        let tema_modulo=modulodetail[0].modulo_tema.filter(p => {
             return p.id == this.props.match.params.tema_id;
         })
 
 
-        let subtema_tema=tema_modulo[0].subtemas.filter(p => {
+        let subtema_tema=tema_modulo[0].tema_clase.filter(p => {
             return p.id == this.props.match.params.video_id;
         })
 
+        console.log(modulodetail)
         this.setState({modulo:modulodetail[0]})
         this.setState({tema:tema_modulo[0]})
         this.setState({subtema:subtema_tema[0]})
 
     }
-    // getTema=()=>{
-    //     let{temas}=this.state
-    //     let tema_modulo =temas.filter(p => {
-    //         return p.id == this.props.match.params.tema_id;
-    //     })
-    //     this.setState({tema:tema_modulo[0]})
-    // }
+  
 
     render() {
         let {modulo, tema, subtema} = this.state
@@ -60,7 +56,7 @@ export class VideoPage extends Component {
                     </Col>
                     <Col lg={6} md={6} xs={24}>
                        <Card>
-                           <VideosList />
+                           {/* <VideosList /> */}
                        </Card>
                     </Col>
 

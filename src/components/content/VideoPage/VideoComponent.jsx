@@ -8,7 +8,7 @@ export const VideoComponent=({subtema})=>{
     return(
 
         <ReactPlayer
-        url={subtema.video}
+        url="https://youtu.be/xioZSo_WOo0"
         playing={false}
         controls={true}
         width={"100%"}

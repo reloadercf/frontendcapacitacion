@@ -24,7 +24,8 @@ export class Contenido extends Component {
   }
 
   gettemas = () => {
-    this.setState({temas: this.props.modulo.temas})
+    this.setState({temas: this.props.modulo.modulo_tema})
+    console.log(this.props.modulo.modulo_tema)
   }
   
 
@@ -42,8 +43,8 @@ export class Contenido extends Component {
       }}>
     
             {temas.map((i, key)=>(
-                <Panel header={i.title}  key={key} style={customPanelStyle} >               
-                    {i.subtemas.map((c, key)=>(             
+                <Panel header={i.title_tema}  key={key} style={customPanelStyle} >               
+                    {i.tema_clase.map((c, key)=>(             
                       <ContenidoCard {...c}  id_tema={i.id} id_modulo={id_modulo} key={key}/>             
                     ))}                
                 </Panel>
