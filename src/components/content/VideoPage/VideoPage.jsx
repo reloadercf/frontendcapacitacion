@@ -32,16 +32,16 @@ export class VideoPage extends Component {
             .then(data => {
 
                 let modulodetail=data.filter(p => {
-                    return p.id === this.props.match.params.modulo_id;
+                    return p.id == this.props.match.params.modulo_id;
                 })
 
                 let tema_modulo=modulodetail[0].modulo_tema.filter(p => {
-                    return p.id === this.props.match.params.tema_id;
+                    return p.id == this.props.match.params.tema_id;
                 })
         
         
                 let subtema_tema=tema_modulo[0].tema_clase.filter(p => {
-                    return p.id === this.props.match.params.video_id;
+                    return p.id == this.props.match.params.video_id;
                 })
         
                 
