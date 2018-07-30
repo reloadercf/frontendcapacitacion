@@ -15,8 +15,29 @@ class App extends Component {
   state={
     modulos:[],
     logged:false,
-    user:{}
-    
+    user:{},
+
+    //States Video
+    url: null,
+    playing: false,
+    volume: 0.8,
+    muted: false,
+    played: 0,
+    loaded: 0,
+    duration: 0,
+    playbackRate: 1.0,
+    loop: false
+
+}
+
+playPause = () => {
+
+
+    this.setState({ playing: !this.state.playing })
+  }
+setVolume=(value) => {
+    let vol=value/100
+    this.setState({ volume:vol})
 }
 
 componentWillMount(){
@@ -41,8 +62,8 @@ getmodulos=()=>{
         .catch(e => {
             //console.log(e)
         })
-
 }
+
 
 checkIfuser=()=>{
   let userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -94,7 +115,13 @@ logOut=()=>{
 
 
   render() {
-      let {modulos, logged}=this.state
+      let {modulos,
+           logged,
+           //state para pausar e iniciar vieo
+           playing,
+           // state volumen de video
+           volume,
+        }=this.state
     return (
       <Layout>
         <NavMenu logged={logged} logOut={this.logOut}/>
@@ -104,7 +131,15 @@ logOut=()=>{
             <HeaderSection/>
         </Header>
         <Content style={{ margin: '24px 16px 0',  }}>
-            <Routes modulos={modulos} logged={logged} logIn={this.logIn}/>
+            <Routes 
+                modulos={modulos} 
+                logged={logged} 
+                logIn={this.logIn}
+                playing={playing}
+                volume={volume}
+                playPause={this.playPause}
+                setVolume={this.setVolume}
+            />
         </Content>
         <Footer  style={{ height:"200px", padding: 0, marginTop:"20vh"}} >
            <FooterSection/>

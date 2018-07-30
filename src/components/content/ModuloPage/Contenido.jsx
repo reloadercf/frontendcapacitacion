@@ -13,25 +13,11 @@ const customPanelStyle = {
 
 export class Contenido extends Component {
 
-  state = {
-    temas: [],
-    subtemas: [],
-  }
 
-  componentWillMount() {
-    this.gettemas()
-    //this.getsubtemas()
-  }
-
-  gettemas = () => {
-    this.setState({temas: this.props.modulo.modulo_tema})
-    console.log(this.props.modulo.modulo_tema)
-  }
-  
 
   render() {
-     let {temas}=this.state
-     let {id_modulo}=this.props
+     let {temas, id_modulo}=this.props
+  
     return (
       <Collapse
         bordered={false}

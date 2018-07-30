@@ -1,0 +1,59 @@
+
+.control-video{
+    background-color: white;
+    padding: 1em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+@media only screen and (max-width: 980px) and (min-width: 821px) 
+{  
+
+}  
+  
+/* Para 800px */  
+@media only screen and (max-width: 820px) and (min-width: 621px) {  
+ 
+}  
+  
+/* Para 600px */  
+@media only screen and (max-width: 620px) and (min-width: 501px) 
+{
+
+
+}  
+
+/* Para 480px */  
+@media only screen and (max-width: 500px) and (min-width: 341px) 
+{
+
+   
+
+    .header-detail h1{
+        font-size: 16px;
+        text-align: center;
+    }
+    .header-detail span{
+        font-size: 12px;
+        text-align: justify;
+        margin-bottom: 1em;
+    }
+
+  
+ 
+}  
+  
+
+/* Para 320px */  
+@media only screen and (max-width: 340px) and (min-width: 5px)  
+{
+
+    .header-detail h1{
+        font-size: 12px;
+    }
+
+
+  
+} 

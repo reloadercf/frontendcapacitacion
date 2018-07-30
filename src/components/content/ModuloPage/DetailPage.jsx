@@ -6,30 +6,40 @@ import { Contenido } from './Contenido';
 
 class DetailPage extends Component {
 
-state={
-        modulos:this.props.modulos,
+    state={
         modulo:{},
-        id_modulo:this.props.match.params.modulo_id
+        id_modulo:this.props.match.params.modulo_id,
+        temas:[],
+        //subtemas:{}
     }
     componentWillMount(){
-     this.getModulo()
+        this.getModulo()
     }
 
 
     getModulo=()=>{
-        let{modulos}=this.state
-        let modulodetail=modulos.filter(p => {
-            return p.id == this.props.match.params.modulo_id    ;
-        })
-        this.setState({modulo:modulodetail[0]})
-        console.log(modulodetail)
-        console.log(this.state.modulo)  
-        console.log(modulos)
-      
+        //const userToken = JSON.parse(localStorage.getItem('userRanchoToken'));
+        let url = "http://127.0.0.1:8000/apis/modulo/";
+        var request = new Request(url, {
+            method: 'GET',
+            headers: new Headers({'Content-Type': 'application/json'})
+        });
+        fetch(request)
+            .then(r => r.json())
+            .then(data => {
+                let modulodetail=data.filter(p => {
+                    return p.id == this.props.match.params.modulo_id;
+                })
+                this.setState({modulo:modulodetail[0]})
+                this.setState({temas:modulodetail[0].modulo_tema})
+                console.log(modulodetail[0].modulo_tema)
+            })
+            .catch(e => {
+                //console.log(e)
+            })
     }
     render() {
-        let{modulo, id_modulo}=this.state
-      
+        let{modulo, temas, id_modulo}=this.state
         return (
             <div>
                 <Row type="flex" justify="start">
@@ -39,7 +49,7 @@ state={
                 </Row>
                 <Row type="flex" justify="center" >
                     <Col lg={20} md={20} xs={24}>
-                        <Contenido modulo={modulo} id_modulo={id_modulo}/>
+                        <Contenido id_modulo={id_modulo} temas={temas}/>
                     </Col>
                 
                 </Row>
