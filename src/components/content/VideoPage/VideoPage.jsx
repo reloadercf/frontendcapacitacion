@@ -48,6 +48,7 @@ export class VideoPage extends Component {
                 this.setState({modulo:modulodetail[0]})
                 this.setState({tema:tema_modulo[0]})
                 this.setState({subtema:subtema_tema[0]})
+
             })
             .catch(e => {
                 //console.log(e)
@@ -59,7 +60,7 @@ export class VideoPage extends Component {
 
     render() {
         let {modulo, tema, subtema} = this.state
-        let{playPause,playing,volume, setVolume }=this.props
+        let{playPause, playing,volume, setVolume, onEnded, match, history }=this.props
         return (
             <div>
                 <Row type="flex" justify="start">
@@ -69,14 +70,8 @@ export class VideoPage extends Component {
                 </Row>
                 <Row type="flex" justify="center">
                     <Col lg={18} md={18} xs={24}>
-                       <VideoComponent   subtema={subtema} volume={volume} setVolume={setVolume}  playing={playing} playPause={playPause}/>                      
+                       <VideoComponent  match={match} history={history} onEnded={onEnded} subtema={subtema} volume={volume} setVolume={setVolume}  playing={playing} playPause={playPause}/>                      
                     </Col>
-                    <Col lg={6} md={6} xs={24}>
-                       <Card>
-                           {/* <VideosList /> */}
-                       </Card>
-                    </Col>
-
                 </Row>
             </div>
         );

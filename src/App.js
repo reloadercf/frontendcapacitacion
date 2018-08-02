@@ -4,16 +4,21 @@ import './App.css';
 import NavMenu from './components/navbar/NavMenu';
 import { FooterSection } from './components/footer/FooterSection';
 import { HeaderSection } from './components/header/HeaderSection';
+
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+import Alert from 'react-s-alert';
+import Main from './components/content/Main';
+
 import Routes from './Routes';
 
 
 const { Header, Content, Footer } = Layout;
 
-
 class App extends Component {
-
   state={
     modulos:[],
+    //my_profile:[],
     logged:false,
     user:{},
 
@@ -26,38 +31,58 @@ class App extends Component {
     loaded: 0,
     duration: 0,
     playbackRate: 1.0,
-    loop: false
+
+    examen_past:false,
+    examen_avalible:false,
+    video_end:false
 
 }
 
-playPause = () => {
-
-
+ playPause = () => 
+  {
     this.setState({ playing: !this.state.playing })
   }
-setVolume=(value) => {
+  setVolume=(value) => {
     let vol=value/100
     this.setState({ volume:vol})
-}
+  }
+
+  onEnded =(examen) => {
+        alert("Se termino el video")
+        this.setState({ examen_avalible: true})
+        //this.props.history.push('/profile')  
+  }
 
 componentWillMount(){
   this.checkIfuser()
   this.getmodulos()
 }
 
-getmodulos=()=>{
+paso_examen=(examen)=>{
 
-    //const userToken = JSON.parse(localStorage.getItem('userRanchoToken'));
-    let url = "http://127.0.0.1:8000/apis/modulo/";
+  let {examen_past}=this.state
+  this.setState({examen_past:examen})
+  console.log(examen_past)
+}
+
+
+getmodulos=()=>{
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    let url = "http://127.0.0.1:8000/my_user/";
     var request = new Request(url, {
         method: 'GET',
-        headers: new Headers({'Content-Type': 'application/json'})
+        headers:new Headers({
+            'Authorization':'Token '+userToken,
+            'Content-Type': 'application/json'
+        }) 
     });
     fetch(request)
         .then(r => r.json())
         .then(data => {
-            this.setState({modulos: data})
-            console.log(this.state.modulos)
+           
+        
+            this.setState({modulos: data[0].modulos})
+            console.log(data[0].modulos)
         })
         .catch(e => {
             //console.log(e)
@@ -121,6 +146,8 @@ logOut=()=>{
            playing,
            // state volumen de video
            volume,
+           my_profile,
+           examen_avalible
         }=this.state
     return (
       <Layout>
@@ -139,9 +166,14 @@ logOut=()=>{
                 volume={volume}
                 playPause={this.playPause}
                 setVolume={this.setVolume}
+                paso_examen={this.paso_examen}
+                examen_avalible={examen_avalible}
+                onEnded={this.onEnded}
+                my_profile={my_profile}
             />
+             <Alert stack={{limit: 3}}contentTemplate={Main} />
         </Content>
-        <Footer  style={{ height:"200px", padding: 0, marginTop:"20vh"}} >
+        <Footer  style={{ padding: 0, marginTop:"20vh"}} >
            <FooterSection/>
         </Footer>
       </Layout>

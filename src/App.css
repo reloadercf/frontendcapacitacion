@@ -4,7 +4,7 @@
 @import './components/content/VideoPage/VideoPage.css';
 @import './components/header/Header.css';
 @import './components/footer/Footer.css';
-
+@import './components/content/HomePage/HomePage.css';
  .login-form {
   max-width: 300px;
 }

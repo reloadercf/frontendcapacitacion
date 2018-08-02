@@ -11,12 +11,10 @@ export const ContenidoCard = ({id, title_clase, id_tema, id_modulo}) => {
                 <h3>{id}: {title_clase}</h3>
             </div>
             <div>
-                <Button
-                    style={{
-                    marginRight: "10px"
-                }}
-                    type="primary"
-                    icon="search">Examen</Button>
+                <Link  to={`/modulo${id_modulo}/tema${id_tema}/examen${id}`}>
+                    <Button style={{ marginRight: "10px"}} type="primary" icon="search">Examen</Button>          
+                </Link>
+               
                
                 <Link to={`/modulo${id_modulo}/tema${id_tema}/video${id}`}> 
                     <Button type="primary" icon="search">Video</Button>
