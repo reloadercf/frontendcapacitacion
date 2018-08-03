@@ -40,8 +40,7 @@ class ProfilePage extends Component {
     
     render() 
     {
-        console.log(my_profile)
-        //let {modulos}=this.props
+        //console.log(my_profile)
         let {my_profile, modulos}=this.state
         return (
             <div>

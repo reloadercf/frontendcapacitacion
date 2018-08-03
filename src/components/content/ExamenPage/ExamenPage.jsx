@@ -110,7 +110,7 @@ class ExamenPage extends Component {
                     position: 'top',
                   
                     customFields: {
-                        customerName: "Reprobaste el modulo repite  ve el video nuevamente",
+                        customerName: "Reprobaste el modulo te invito a repetir nuevamente la clase, exito",
                     }
                     
                 });
