@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Row, Col, Card} from 'antd';
+import {Row, Col} from 'antd';
 import {HeaderVideo} from './HeaderVideo';
 import {VideoComponent} from './VideoComponent';
-import {VideosList} from './VideosList';
+
 
 export class VideoPage extends Component {
 

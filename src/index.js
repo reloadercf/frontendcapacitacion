@@ -6,6 +6,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'moment/locale/fr';
 import {BrowserRouter} from 'react-router-dom';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 
 
 const WithRouter = () => (

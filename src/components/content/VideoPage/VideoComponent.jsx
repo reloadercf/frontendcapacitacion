@@ -61,7 +61,7 @@ export class VideoComponent extends Component {
   
     render() {
         let {subtema, match, history}=this.props
-        let { url, playing, volume, muted, loop, played, loaded, duration, playbackRate } = this.state
+        let {playing, volume, played } = this.state
         let link = `/modulo${match.params.modulo_id}/tema${match.params.tema_id}/examen${match.params.video_id}`
         return (
             <div

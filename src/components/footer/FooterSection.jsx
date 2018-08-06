@@ -40,8 +40,10 @@ export const FooterSection=()=>{
                         <div className="aviso" style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
                             <p>
                                 Con nuestro Pensamientos Cambiamos el Mundo
-                                ©Dipra 2017. All rights reserved.Aviso de prvacidad
                             </p>
+                             <p>
+                             ©Dipra 2018. All rights reserved.
+                             </p>
                         </div> 
                     </Col>   
                 </Row>

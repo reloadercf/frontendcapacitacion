@@ -26,13 +26,13 @@ class LoginForm extends React.Component {
                             rules: [
                                 {
                                     required: true,
-                                    message: 'Please input your username!'
+                                    message: 'Ingresa tu nombre de usuario!'
                                 }
                             ]
                         })(
                             <Input
                                 prefix={< Icon type = "user" style = {{ color: 'rgba(0,0,0,.25)' }}/>}
-                                placeholder="Username"/>
+                                placeholder="Usuario"/>
                         )}
                     </FormItem>
                     <FormItem>
@@ -40,14 +40,14 @@ class LoginForm extends React.Component {
                             rules: [
                                 {
                                     required: true,
-                                    message: 'Please input your Password!'
+                                    message: 'Ingresa tu contraseña'
                                 }
                             ]
                         })(
                             <Input
                                 prefix={< Icon type = "lock" style = {{ color: 'rgba(0,0,0,.25)' }}/>}
                                 type="password"
-                                placeholder="Password"/>
+                                placeholder="Contraseña"/>
                         )}
                     </FormItem>
                     <FormItem>
