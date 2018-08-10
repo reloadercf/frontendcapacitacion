@@ -6,8 +6,8 @@ class SliderComponent extends Component {
             dots: true,
             fade: true,
             infinite: true,
-            speed: 500,
-            slidesToShow: 2,
+            speed: 1000,
+            slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 4000,
@@ -20,21 +20,22 @@ class SliderComponent extends Component {
             }}>
                 <Slider {...settings}>
                     <div className="container">
-                        <img src="https://images.pexels.com/photos/7096/people-woman-coffee-meeting.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="imagen"/>
+                        <img src="https://images.pexels.com/photos/7096/people-woman-coffee-meeting.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="imagen 1"/>
                         <div className="div-gradient">
-                            <h1 className="bottomleft">Amplia tus conocimientos</h1>
+                            <h1 >Amplia tus conocimientos</h1>
                         </div>
                     </div>
                     <div className="container">
-                        <img src="https://images.pexels.com/photos/946250/pexels-photo-946250.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="imagen"/>
+                        <img src="https://images.pexels.com/photos/946250/pexels-photo-946250.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="imagen 2"/>
                         <div className="div-gradient">
-                            <h1 className="bottomleft">Mejora tus habilidades de prospección</h1>
+                            <h1 >Mejora tus habilidades de prospección</h1>
                         </div>
                     </div>
+
                     <div className="container">
-                        <img src="https://images.pexels.com/photos/955447/pexels-photo-955447.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="imagen"/>
+                        <img src="https://images.pexels.com/photos/955447/pexels-photo-955447.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="imagen 3"/>
                         <div className="div-gradient">
-                            <h1 className="bottomleft">Aprende a manejar las herramienats para potencializar tus ventas</h1>
+                            <h1>Aprende a manejar las herramientas para potencializar tus ventas</h1>
                         </div>
                     </div>
 

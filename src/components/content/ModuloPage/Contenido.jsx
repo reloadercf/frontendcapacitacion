@@ -13,10 +13,38 @@ const customPanelStyle = {
 
 export class Contenido extends Component {
 
+   state={
+     evaluaciones:[]
+   }
+   
+   componentWillMount(){
+     this.get_evaluaciones()
+   }
 
+   get_evaluaciones=()=>{
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    let url = "http://127.0.0.1:8000/my_evaluations/";
+    var request = new Request(url, {
+        method: 'GET',
+        headers:new Headers({
+            'Authorization':'Token '+userToken,
+            'Content-Type': 'application/json'
+        }) 
+    });
+    fetch(request)
+        .then(r => r.json())
+        .then(data => {
+            this.setState({evaluaciones: data})
+            console.log(data)
+        })
+        .catch(e => {
+            //console.log(e)
+        })
+    }
 
   render() {
      let {temas, id_modulo}=this.props
+     let{evaluaciones}=this.state
   
     return (
       <Collapse
@@ -29,9 +57,9 @@ export class Contenido extends Component {
       }}>
     
             {temas.map((i, key)=>(
-                <Panel header={i.title_tema}  key={key} style={customPanelStyle} >               
+                <Panel header={i.title_tema}  key={key} style={customPanelStyle}>               
                     {i.tema_clase.map((c, key)=>(             
-                      <ContenidoCard {...c}  id_tema={i.id} id_modulo={id_modulo} key={key}/>             
+                      <ContenidoCard {...c}  id_tema={i.id} id_modulo={id_modulo} key={key} evaluaciones={evaluaciones}/>             
                     ))}                
                 </Panel>
             ))}    

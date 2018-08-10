@@ -18,7 +18,6 @@ const { Header, Content, Footer } = Layout;
 class App extends Component {
   state={
     modulos:[],
-    //my_profile:[],
     logged:false,
     user:{},
     examen_past:false,
@@ -51,11 +50,12 @@ getmodulos=()=>{
     });
     fetch(request)
         .then(r => r.json())
-        .then(data => {
-           
-        
+        .then(data => {    
             this.setState({modulos: data[0].modulos})
-            console.log(data[0].modulos)
+            this.setState({user:data[0].correo})
+            //console.log(data[0].correo)
+
+
         })
         .catch(e => {
             //console.log(e)
@@ -72,7 +72,10 @@ checkIfuser=()=>{
     else
       {
         this.setState({logged:false})
+        //this.props.history.push('/')
       }
+
+    console.log(this.state.logged)
 }
 
 logIn=(user)=>{
@@ -123,7 +126,8 @@ logOut=()=>{
       let {modulos,
            logged,
            my_profile,
-           examen_avalible
+           examen_avalible,
+           user
         }=this.state
     return (
       <Layout>
@@ -141,7 +145,7 @@ logOut=()=>{
                 paso_examen={this.paso_examen}
                 examen_avalible={examen_avalible}
                 onEnded={this.onEnded}
-                my_profile={my_profile}
+                user={user}
             />
              <Alert stack={{limit: 3}}contentTemplate={Main} />
 

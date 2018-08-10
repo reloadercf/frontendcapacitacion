@@ -38,6 +38,8 @@ class DetailPage extends Component {
                 //console.log(e)
             })
     }
+
+    
     render() {
         let{modulo, temas, id_modulo}=this.state
         return (

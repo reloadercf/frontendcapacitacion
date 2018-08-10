@@ -15,7 +15,9 @@ class ExamenPage extends Component {
         examen:{},
         preguntas:[],
         respuestas:[],
-        res_correctas:0
+        res_correctas:0,
+        evaluacion:{},
+        intentos:0      
       }
     
       componentWillMount()
@@ -24,8 +26,8 @@ class ExamenPage extends Component {
       }
 
       getModulo = () => {
+        let{evaluacion}=this.state
         let modulos=this.props.modulos
-
         let url = "http://127.0.0.1:8000/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',
@@ -48,6 +50,10 @@ class ExamenPage extends Component {
                 })
 
                 let examen_clase=subtema_tema[0].nombre_examen
+                
+                evaluacion['clase']=subtema_tema[0].id
+                this.setState({evaluacion})
+    
 
                 this.setState({examen:examen_clase})
                 this.setState({preguntas:examen_clase.pregunta_examen})
@@ -55,6 +61,7 @@ class ExamenPage extends Component {
 
                   console.log(subtema_tema[0].nombre_examen)
                   console.log(examen_clase.pregunta_examen)
+               
                   
             })
             .catch(e => {
@@ -86,9 +93,16 @@ class ExamenPage extends Component {
               this.setState({res_correctas: result.length})            
         }
 
+
+
        SendExamen=(e)=>{
-           let{res_correctas, preguntas}=this.state
-            if(res_correctas>=(preguntas.length-1)){
+           let{res_correctas, preguntas, evaluacion, intentos}=this.state
+           let usuario=this.props.user
+            evaluacion['usuario']=usuario.id
+            evaluacion['resultado']=res_correctas
+            
+            if(res_correctas>=(preguntas.length-1))
+            {
                 Alert.success('Felicidades:', {
                     effect: 'slide',
                     timeout: 5000,
@@ -101,25 +115,51 @@ class ExamenPage extends Component {
                     
                 });
                 this.props.paso_examen(true)
+                evaluacion['aprobado']=true
+                evaluacion['intentos']=intentos+1;
+                this.setState(evaluacion)
+                
+                const userToken = JSON.parse(localStorage.getItem('userToken'));
+                let url = 'http://127.0.0.1:8000/my_evaluations/'
+                var request = new Request(url, {
+                    method: 'POST',
+                    body: JSON.stringify(evaluacion),
+                    headers: new Headers({
+                        'Authorization': 'Token ' + userToken,
+                        'Content-Type': 'application/json'
+                    })
+                });
+    
                 this.props.history.push('/profile')  
             }
             else{
-                Alert.error('Felicidades:', {
+                Alert.error('Reprobaste:', {
                     effect: 'slide',
                     timeout: 5000,
-                    position: 'top',
-                  
+                    position: 'top',         
                     customFields: {
                         customerName: "Reprobaste el modulo te invito a repetir nuevamente la clase, exito",
-                    }
-                    
+                    }                   
                 });
-                    this.props.paso_examen(false)
-                    this.props.history.push(`/modulo${this.props.match.params.modulo_id}/tema${this.props.match.params.tema_id}/video${this.props.match.params.examen_id}`)  
 
-               
+                this.props.paso_examen(false)
+                let nuevo_intento=intentos+1
+                console.log(nuevo_intento)
+                this.setState({intentos:nuevo_intento})
+                console.log(intentos)
 
-               
+                const userToken = JSON.parse(localStorage.getItem('userToken'));
+                let url = 'http://127.0.0.1:8000/my_evaluations/'
+                var request = new Request(url, {
+                    method: 'GET',
+                    body: JSON.stringify(evaluacion),
+                    headers: new Headers({
+                        'Authorization': 'Token ' + userToken,
+                        'Content-Type': 'application/json'
+                    })
+                });
+                 
+                    this.props.history.push(`/modulo${this.props.match.params.modulo_id}/tema${this.props.match.params.tema_id}/video${this.props.match.params.examen_id}`)       
             }
        }
 
@@ -135,7 +175,7 @@ class ExamenPage extends Component {
                 </Row>
                 <Row type="flex" justify="center">
                     <Col lg={21} md={20} xs={24}>
-                            <ExamenComponent onChange={this.onChange} SendExamen={this.SendExamen} respuesta={respuesta} examen={examen} preguntas={preguntas}/>            
+                        <ExamenComponent onChange={this.onChange} SendExamen={this.SendExamen} respuesta={respuesta} examen={examen} preguntas={preguntas}/>            
                     </Col>
                    
 

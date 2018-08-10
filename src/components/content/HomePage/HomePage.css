@@ -19,7 +19,7 @@
 }
 
 
-.container
+div .container
 {
   position: relative;
   width: 100%;
@@ -27,7 +27,7 @@
   margin-top: 1em;
 }
 
-.container img{
+div .container img{
   width: 95%;
   height: 600px;
   opacity: 0.8;
@@ -42,7 +42,7 @@
   margin-top: 5em;
 }
 
-.bottomleft {
+.div-gradient h1 {
   position: absolute;
   bottom: 8em;
   left: 2em;
@@ -56,8 +56,7 @@
 
 }
 
-
-.bottomleft:hover {
+.div-gradient h1:hover {
 position: absolute;
 bottom: 7em;
 font-size: 30px;
@@ -65,9 +64,12 @@ color: #f7f7f7;
 background: rgb(26, 25, 25);
 padding: 0.5em;
 width: 73%; 
-transition: 0.5s;  
+transition: 0.8s;  
 
 }
+
+
+
 
 
 
@@ -95,8 +97,8 @@ transition: 0.5s;
   }
 
   .container img{
-    width: 100%;
-    height: 50%;
+    width: 50%;
+    height: auto;
     opacity: 0.8;
     display: block;
     margin-left: auto;
@@ -104,7 +106,7 @@ transition: 0.5s;
 
   }
 
-  .bottomleft {
+  .div-gradient h1 {
     position: absolute;
     bottom: 2em;
     left: 100px;

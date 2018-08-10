@@ -5,6 +5,9 @@
 @import './components/header/Header.css';
 @import './components/footer/Footer.css';
 @import './components/content/HomePage/HomePage.css';
+@import './components/content/evaluaciones/evaluaciones.css';
+
+
  .login-form {
   max-width: 300px;
 }
