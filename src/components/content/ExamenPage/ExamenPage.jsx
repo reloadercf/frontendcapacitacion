@@ -28,7 +28,7 @@ class ExamenPage extends Component {
       getModulo = () => {
         let{evaluacion}=this.state
         let modulos=this.props.modulos
-        let url = "http://127.0.0.1:8000/apis/modulo/";
+        let url = "https://infinite-peak-15466.herokuapp.com/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',
             headers: new Headers({'Content-Type': 'application/json'})
@@ -100,6 +100,8 @@ class ExamenPage extends Component {
            let usuario=this.props.user
             evaluacion['usuario']=usuario.id
             evaluacion['resultado']=res_correctas
+
+            
             
             if(res_correctas>=(preguntas.length-1))
             {
@@ -120,7 +122,7 @@ class ExamenPage extends Component {
                 this.setState(evaluacion)
                 
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
-                let url = 'http://127.0.0.1:8000/my_evaluations/'
+                let url = 'https://infinite-peak-15466.herokuapp.com/my_evaluations/'
                 var request = new Request(url, {
                     method: 'POST',
                     body: JSON.stringify(evaluacion),
@@ -149,7 +151,7 @@ class ExamenPage extends Component {
                 console.log(intentos)
 
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
-                let url = 'http://127.0.0.1:8000/my_evaluations/'
+                let url = 'https://infinite-peak-15466.herokuapp.com/my_evaluations/'
                 var request = new Request(url, {
                     method: 'GET',
                     body: JSON.stringify(evaluacion),

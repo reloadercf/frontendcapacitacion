@@ -16,7 +16,7 @@ class ProfilePage extends Component {
       
     get_myprofile=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "http://127.0.0.1:8000/my_user/";
+    let url = "https://infinite-peak-15466.herokuapp.com/my_user/";
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
