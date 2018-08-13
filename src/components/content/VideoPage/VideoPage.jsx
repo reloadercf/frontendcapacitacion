@@ -30,31 +30,29 @@ export class VideoPage extends Component {
             .then(r => r.json())
             .then(data => {
 
-                let modulodetail = data.filter(p => {
-                    return p.id == this.props.match.params.modulo_id;
+
+                let modulodetail=data.filter(p => {
+                   return p.id == this.props.match.params.modulo_id;
                 })
 
-                let tema_modulo = modulodetail[0]
-                    .modulo_tema
-                    .filter(p => {
-                        return p.id == this.props.match.params.tema_id;
-                    })
-
-                let subtema_tema = tema_modulo[0]
-                    .tema_clase
-                    .filter(p => {
-                        return p.id == this.props.match.params.video_id;
-                    })
-
-                this.setState({modulo: modulodetail[0]})
-                this.setState({tema: tema_modulo[0]})
-                this.setState({subtema: subtema_tema[0]})
+                let tema_modulo=modulodetail[0].modulo_tema.filter(p => {
+                    return p.id == this.props.match.params.tema_id;
+                })
+        
+        
+                let subtema_tema=tema_modulo[0].tema_clase.filter(p => {
+                    return p.id == this.props.match.params.video_id;
+                })
+        
+                
+                this.setState({modulo:modulodetail[0]})
+                this.setState({tema:tema_modulo[0]})
+                this.setState({subtema:subtema_tema[0]})
 
             })
             .catch(e => {
                 //console.log(e)
             })
-
     }
 
     render() {
