@@ -8,25 +8,40 @@ class DetailPage extends Component {
 
     state={
         modulo:{},
-        id_modulo:this.props.match.params.modulo_id
+        id_modulo:this.props.match.params.modulo_id,
+        temas:[],
+        //subtemas:{}
     }
     componentWillMount(){
-        this.getOrden()
+        this.getModulo()
     }
 
-    getOrden=()=>{
-        let modulos=this.props.modulos
-        let modulodetail=modulos.filter(p => {
-            return p.id == this.props.match.params.modulo_id;
-        })
-        this.setState({modulo:modulodetail[0]})
-        console.log(modulodetail)
-        console.log(this.state.modulo)  
-      
+
+    getModulo=()=>{
+        //const userToken = JSON.parse(localStorage.getItem('userRanchoToken'));
+        let url = "https://infinite-peak-15466.herokuapp.com/apis/modulo/";
+        var request = new Request(url, {
+            method: 'GET',
+            headers: new Headers({'Content-Type': 'application/json'})
+        });
+        fetch(request)
+            .then(r => r.json())
+            .then(data => {
+                let modulodetail=data.filter(p => {
+                    return p.id == this.props.match.params.modulo_id;
+                })
+                this.setState({modulo:modulodetail[0]})
+                this.setState({temas:modulodetail[0].modulo_tema})
+                console.log(modulodetail[0].modulo_tema)
+            })
+            .catch(e => {
+                //console.log(e)
+            })
     }
+
+    
     render() {
-        let{modulo,id_modulo}=this.state
-      
+        let{modulo, temas, id_modulo}=this.state
         return (
             <div>
                 <Row type="flex" justify="start">
@@ -36,7 +51,7 @@ class DetailPage extends Component {
                 </Row>
                 <Row type="flex" justify="center" >
                     <Col lg={20} md={20} xs={24}>
-                        <Contenido modulo={modulo} id_modulo={id_modulo}/>
+                        <Contenido id_modulo={id_modulo} temas={temas}/>
                     </Col>
                 
                 </Row>

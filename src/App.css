@@ -1,8 +1,12 @@
 @import '~antd/dist/antd.css';
 @import './components/content/ModuloPage/ModuloPage.css';
 @import './components/content/ExamenPage/ExamenPage.css';
+@import './components/content/VideoPage/VideoPage.css';
 @import './components/header/Header.css';
 @import './components/footer/Footer.css';
+@import './components/content/HomePage/HomePage.css';
+@import './components/content/evaluaciones/evaluaciones.css';
+
 
  .login-form {
   max-width: 300px;

@@ -7,19 +7,19 @@ const Logged = ({logOut}) => (
   <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
 
     <Menu.Item key="6" onClick={logOut} >
-      <Icon type="appstore-o"/>
+      <Icon type="appstore-o" style={{fontSize: "20px"}}/>
       <span className="nav-text" >Cerrar Sesion</span>
     </Menu.Item>
     <Menu.Item key="7">
       <Link to="/profile">
-        <Icon type="team"/>
+        <Icon type="team" style={{fontSize: "20px"}}/>
         <span className="nav-text">Modulos</span>
       </Link>
     </Menu.Item>
     <Menu.Item key="8">
-      <Link to="/examenes">
-        <Icon type="shop"/>
-        <span className="nav-text">Examenes</span>
+      <Link to="/evaluaciones">
+        <Icon type="profile" style={{fontSize: "20px"}}/>
+        <span className="nav-text">Evaluaciones</span>
       </Link>
     </Menu.Item>
   </Menu>
@@ -56,7 +56,8 @@ class NavMenu extends Component {
         zIndex: 1
       }}>
 
-        <div className="logo"/> {logged
+        <div className="logo"/> 
+        {logged
           ? <Logged 
               logOut={this.props.logOut}/>
           : <Login/>}

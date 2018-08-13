@@ -1,7 +1,8 @@
 import React from 'react'
 import {Row, Col, Card, Radio} from 'antd';
+import { Button } from 'antd';
 const RadioGroup = Radio.Group;
-export const ExamenComponent = ({RespExamen, respuesta}) => {
+export const ExamenComponent = ({onChange, preguntas,SendExamen}) => {
     return (
         <div style={{
             marginTop: "3em"
@@ -10,44 +11,31 @@ export const ExamenComponent = ({RespExamen, respuesta}) => {
                 <Row>
                     <Col lg={24} md={24} sm={24} xs={24}>
                         <div style={{marginTop: "3em"}}>
-                            <h3>¿Esta es la pregunta 1?</h3>
-                            <div>
-                                <RadioGroup name={"hola1"} onChange={RespExamen} value={respuesta}>
-                                    <Radio value={1}>A</Radio>
-                                    <Radio value={2}>B</Radio>
-                                    <Radio value={3}>C</Radio>
-                                    <Radio value={4}>D</Radio>
-                                </RadioGroup>
-                            </div>
-                            <hr/>
+
+                            {preguntas.map((i, key)=>(                             
+                                <div key={key} style={{marginBottom:"2em"}}>
+                                    <h3>{i.id} {i.pregunta}</h3>
+                                    <RadioGroup  onChange={onChange} name={i.pregunta} defaultValue={i.pregunta} >
+                                        {i.respuesta_pregunta.map((b, key)=>(                             
+                                                <div key={key}>
+                                                    <Radio name={i.pregunta} value={b.respuestas}>{b.respuestas}</Radio>
+                                                </div>           
+                                        ))} 
+                                    </RadioGroup>   
+                                    <hr/>
+                                </div>
+                                    
+                            ))} 
+                            <Button htmlType="submit" onClick={SendExamen} type="primary">Calificar</Button>
+
+                      
+                            
                         </div>     
-                        <div style={{marginTop: "3em"}}>
-                            <h3>¿Esta es la pregunta 2?</h3>
-                            <div>
-                                <RadioGroup name={"hol2"}onChange={RespExamen} value={respuesta}>
-                                    <Radio value={1}>A</Radio>
-                                    <Radio value={2}>B</Radio>
-                                    <Radio value={3}>C</Radio>
-                                    <Radio value={4}>D</Radio>
-                                </RadioGroup>
-                            </div>
-                            <hr/>
-                        </div>   
-                        <div style={{marginTop: "3em"}}>
-                            <h3>¿Esta es la pregunta 2?</h3>
-                            <div>
-                                <RadioGroup name={"hola3"} onChange={RespExamen} value={respuesta} >
-                                    <Radio value={1}>A</Radio>
-                                    <Radio value={2}>B</Radio>
-                                    <Radio value={3}>C</Radio>
-                                    <Radio value={4}>D</Radio>
-                                </RadioGroup>
-                            </div>
-                            <hr/>
-                        </div>    
+                  
                     </Col>
                 </Row>
             </Card>
         </div>
     )
 }
+

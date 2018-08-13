@@ -1,33 +1,52 @@
 import React, {Component} from 'react';
-import {Row, Col, Card} from 'antd';
-import { HeaderVideo } from './HeaderVideo';
-import { VideoComponent } from './VideoComponent';
-import { VideosList } from './VideosList';
+import {Row, Col} from 'antd';
+import {HeaderVideo} from './HeaderVideo';
+import {VideoComponent} from './VideoComponent';
 
 
 export class VideoPage extends Component {
 
     state = {
+        modulos: [],
         modulo: {},
-        temas:[],
-        tema:{},
-        subtema:{}
+        temas: [],
+        tema: {},
+        subtema: {}
     }
     componentWillMount() {
         this.getModulo()
-        //this.getTema()
+
     }
+
     getModulo = () => {
-        let modulos=this.props.modulos
-        let modulodetail=modulos.filter(p => {
-            return p.id == this.props.match.params.modulo_id;
-        })
+        let modulos = this.props.modulos
 
-        let tema_modulo=modulodetail[0].temas.filter(p => {
-            return p.id == this.props.match.params.tema_id;
-        })
+        let url = "https://infinite-peak-15466.herokuapp.com/apis/modulo/";
+        var request = new Request(url, {
+            method: 'GET',
+            headers: new Headers({'Content-Type': 'application/json'})
+        });
+        fetch(request)
+            .then(r => r.json())
+            .then(data => {
 
+                let modulodetail = data.filter(p => {
+                    return p.id == this.props.match.params.modulo_id;
+                })
 
+                let tema_modulo = modulodetail[0]
+                    .modulo_tema
+                    .filter(p => {
+                        return p.id == this.props.match.params.tema_id;
+                    })
+
+                let subtema_tema = tema_modulo[0]
+                    .tema_clase
+                    .filter(p => {
+                        return p.id == this.props.match.params.video_id;
+                    })
+
+<<<<<<< HEAD
 <<<<<<< HEAD
         let subtema_tema=tema_modulo[0].subtemas.filter(p => {
             return p.id == this.props.match.params.video_id;
@@ -54,24 +73,30 @@ export class VideoPage extends Component {
                 this.setState({modulo:modulodetail[0]})
                 this.setState({tema:tema_modulo[0]})
                 this.setState({subtema:subtema_tema[0]})
+=======
+                this.setState({modulo: modulodetail[0]})
+                this.setState({tema: tema_modulo[0]})
+                this.setState({subtema: subtema_tema[0]})
+
+>>>>>>> video-capacitacion
             })
             .catch(e => {
                 //console.log(e)
             })
+<<<<<<< HEAD
   
 >>>>>>> d3d4c4a... corregido controles de video ya
+=======
+>>>>>>> video-capacitacion
 
     }
-    // getTema=()=>{
-    //     let{temas}=this.state
-    //     let tema_modulo =temas.filter(p => {
-    //         return p.id == this.props.match.params.tema_id;
-    //     })
-    //     this.setState({tema:tema_modulo[0]})
-    // }
 
     render() {
         let {modulo, tema, subtema} = this.state
+        let {
+            match,
+            history
+        } = this.props
         return (
             <div>
                 <Row type="flex" justify="start">
@@ -81,17 +106,16 @@ export class VideoPage extends Component {
                 </Row>
                 <Row type="flex" justify="center">
                     <Col lg={18} md={18} xs={24}>
-                       <VideoComponent   subtema={subtema} />                      
+                        <VideoComponent
+                            match={match}
+                            history={history}
+                            subtema={subtema}
+                            />
                     </Col>
-                    <Col lg={6} md={6} xs={24}>
-                       <Card>
-                           <VideosList />
-                       </Card>
-                    </Col>
-
                 </Row>
             </div>
         );
     }
 }
+
 

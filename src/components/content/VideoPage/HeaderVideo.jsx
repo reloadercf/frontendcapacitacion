@@ -12,9 +12,9 @@ export const HeaderVideo =({modulo, tema, subtema})=>{
             <Card >
                 <div>
                     <h1>MODULO {modulo.id}</h1>
-                    <h1>{tema.title}</h1>
-                    <h1>{subtema.title}</h1>
-                    <span>Descripcio del subtema</span>
+                    <h1>{tema.title_tema}</h1>
+                    <h1>{subtema.title_clase}</h1>
+                    <span>{subtema.descripcion}</span>
                 </div>
             </Card>
 
@@ -22,3 +22,4 @@ export const HeaderVideo =({modulo, tema, subtema})=>{
 
     )
 }
+

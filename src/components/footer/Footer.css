@@ -1,5 +1,29 @@
 .footer{
-    height: 200px;
+    height: auto;
     color: #ffff;
     background: #0e0220;
+    padding: 1.5em;
+}
+.footer h2{
+    color: #ffff;
+}
+
+.footer .contacto{
+    display: flex;
+    flex-direction: column;
+}
+.footer .contacto span{
+   margin-top: 1em;
+   font-size: 14px;
+}
+
+
+.footer .follow .icons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:start;
+    align-items: center;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
 }
