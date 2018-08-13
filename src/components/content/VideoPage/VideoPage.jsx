@@ -53,7 +53,6 @@ export class VideoPage extends Component {
             .catch(e => {
                 //console.log(e)
             })
-
     }
 
     render() {
