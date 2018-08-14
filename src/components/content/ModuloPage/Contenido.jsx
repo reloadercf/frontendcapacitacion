@@ -23,7 +23,7 @@ export class Contenido extends Component {
 
    get_evaluaciones=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "https://infinite-peak-15466.herokuapp.com/my_evaluations/";
+    let url = "http://127.0.0.1:8000/my_evaluations/";
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({

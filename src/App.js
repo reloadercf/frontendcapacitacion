@@ -40,7 +40,7 @@ paso_examen=(examen)=>{
 
 getmodulos=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "https://infinite-peak-15466.herokuapp.com/my_user/";
+    let url = "http://127.0.0.1:8000/my_user/";
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -79,7 +79,7 @@ checkIfuser=()=>{
 }
 
 logIn=(user)=>{
-let url = 'https://infinite-peak-15466.herokuapp.com/api-token-auth/';
+let url = 'http://127.0.0.1:8000/api-token-auth/';
 var request = new Request(url, {
     method: 'POST',
     body: JSON.stringify(user),
@@ -155,6 +155,8 @@ logOut=()=>{
         </Footer>
       </Layout>
     </Layout>
+
+    
     );
   }
 }

@@ -21,7 +21,7 @@ export class VideoPage extends Component {
     getModulo = () => {
         let modulos = this.props.modulos
 
-        let url = "https://infinite-peak-15466.herokuapp.com/apis/modulo/";
+        let url = "http://127.0.0.1:8000/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',
             headers: new Headers({'Content-Type': 'application/json'})
