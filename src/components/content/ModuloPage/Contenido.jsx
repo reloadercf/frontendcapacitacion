@@ -43,7 +43,7 @@ export class Contenido extends Component {
     }
 
   render() {
-     let {temas, id_modulo}=this.props
+     let {temas, id_modulo, do_evaluacion}=this.props
      let{evaluaciones}=this.state
   
     return (
@@ -59,7 +59,7 @@ export class Contenido extends Component {
             {temas.map((i, key)=>(
                 <Panel header={i.title_tema}  key={key} style={customPanelStyle}>               
                     {i.tema_clase.map((c, key)=>(             
-                      <ContenidoCard {...c}  id_tema={i.id} id_modulo={id_modulo} key={key} evaluaciones={evaluaciones}/>             
+                      <ContenidoCard {...c}  id_tema={i.id} id_modulo={id_modulo} key={key} evaluaciones={evaluaciones} do_evaluacion={do_evaluacion}/>             
                     ))}                
                 </Panel>
             ))}    

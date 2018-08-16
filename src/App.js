@@ -23,7 +23,7 @@ class App extends Component {
     examen_past:false,
     examen_avalible:false,
     video_end:false
-
+    
 }
 
 componentWillMount(){
@@ -36,6 +36,50 @@ paso_examen=(examen)=>{
   this.setState({examen_past:examen})
   console.log(examen_past)
 }
+
+//esta funcion primero validamos que el state examen_avalible  este en false
+finish_class=()=>{
+    this.setState({video_end:true})
+    console.log(this.state.video_end)
+}
+
+do_evaluacion=(clase)=>{
+    let{video_end}=this.state
+   
+    if(video_end)
+    {    
+
+        let evaluacion={}
+        evaluacion['usuario']=this.state.user.id
+        evaluacion['clase']=clase
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+        let url = "http://127.0.0.1:8000/apis/evaluacion/"
+        var request = new Request(url, {
+            method: 'POST',
+            body: JSON.stringify(evaluacion),
+            headers: new Headers({
+                'Authorization': 'Token ' + userToken,
+                'Content-Type': 'application/json'
+            })
+        });
+        fetch(request)
+        .then(r=>r.json())
+        .then(data=>{
+            console.log(data) 
+            console.log("Se creo la evaluacion") 
+        })
+        .catch(e=>{
+            console.log(e)
+    })  
+    }
+    else{
+        console.log("necesitas ver el video")
+    }
+    
+}
+
+
+
 
 
 getmodulos=()=>{
@@ -53,12 +97,9 @@ getmodulos=()=>{
         .then(data => {    
             this.setState({modulos: data[0].modulos})
             this.setState({user:data[0].correo})
-            //console.log(data[0].correo)
-
-
+            console.log(this.state.user)
         })
         .catch(e => {
-            //console.log(e)
         })
 }
 
@@ -146,8 +187,11 @@ logOut=()=>{
                 examen_avalible={examen_avalible}
                 onEnded={this.onEnded}
                 user={user}
+                finish_class={this.finish_class}
+                do_evaluacion={this.do_evaluacion}
+
             />
-             <Alert stack={{limit: 3}}contentTemplate={Main} />
+             <Alert stack={{limit: 3}} contentTemplate={Main} />
 
         </Content>
         <Footer  style={{ padding: 0, marginTop:"20vh"}} >

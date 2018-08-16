@@ -41,7 +41,7 @@ class EvaluacionPage extends Component {
     render() {
         let{evaluaciones}=this.state
         return (
-            <Row gutter={"24"} justify={"center"} style={{height: "43vh"}}>
+            <Row gutter={24} justify={"center"} style={{height: "43vh"}}>
                 {evaluaciones.map((i, key)=>(
                 <Col  lg={6} md={6} sm={12} xs={24} key={key}>                                   
                          <div style={{marginBottom:"2em" }}  >

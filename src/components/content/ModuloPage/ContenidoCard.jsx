@@ -3,7 +3,7 @@ import {Button,Icon} from 'antd';
 import {Link, } from 'react-router-dom';
 
 
-export const ContenidoCard = ({id, title_clase, id_tema, id_modulo}) => {
+export const ContenidoCard = ({id, title_clase, id_tema, id_modulo,do_evaluacion}) => {
     
     // let get_evaluacion=evaluaciones.find(p => {
     //     return p.clase.title_clase == title_clase;
@@ -26,6 +26,10 @@ export const ContenidoCard = ({id, title_clase, id_tema, id_modulo}) => {
                         }
                 
                  */}
+                
+                <Link  to={`/modulo${id_modulo}/tema${id_tema}/examen${id}`}>
+                    <Button onClick={()=> do_evaluacion(id)}  style={{ marginRight: "10px"}} type="primary" icon="search">Examen</Button>          
+                </Link>
                 <Link to={`/modulo${id_modulo}/tema${id_tema}/video${id}`}> 
                     <Button type="primary" icon="search">Video</Button>
                 </Link>

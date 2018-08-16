@@ -41,6 +41,7 @@ class DetailPage extends Component {
 
     
     render() {
+        let{do_evaluacion}=this.props
         let{modulo, temas, id_modulo}=this.state
         return (
             <div>
@@ -51,7 +52,7 @@ class DetailPage extends Component {
                 </Row>
                 <Row type="flex" justify="center" >
                     <Col lg={20} md={20} xs={24}>
-                        <Contenido id_modulo={id_modulo} temas={temas}/>
+                        <Contenido id_modulo={id_modulo} temas={temas} do_evaluacion={do_evaluacion}/>
                     </Col>
                 
                 </Row>

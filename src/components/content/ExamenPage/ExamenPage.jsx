@@ -55,12 +55,8 @@ class ExamenPage extends Component {
 
                 evaluacion['clase']=subtema_tema[0].id
                 this.setState({evaluacion})
-    
-
                 this.setState({examen:examen_clase})
                 this.setState({preguntas:examen_clase.pregunta_examen})
-
-
                   console.log(subtema_tema[0].nombre_examen)
                   console.log(examen_clase.pregunta_examen)
                
@@ -102,7 +98,8 @@ class ExamenPage extends Component {
            let usuario=this.props.user
             evaluacion['usuario']=usuario.id
             evaluacion['resultado']=res_correctas
-    
+
+            
 
             if(res_correctas>=(preguntas.length-1))
             {
@@ -120,8 +117,7 @@ class ExamenPage extends Component {
                 this.props.paso_examen(true)
                 evaluacion['aprobado']=true
                 evaluacion['intentos']=intentos+1;
-                console.log(evaluacion)
-                this.setState(evaluacion)
+     
 
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
                 let url = "http://127.0.0.1:8000/apis/evaluacion/"
@@ -133,11 +129,25 @@ class ExamenPage extends Component {
                         'Content-Type': 'application/json'
                     })
                 });
-    
-                this.props.history.push('/profile')  
+                fetch(request)
+                .then(r=>r.json())
+                .then(data=>{
+                    console.log(data)
+                    this.props.history.push('/profile')  
+                    this.setState({evaluacion:data})          
+                })
+                .catch(e=>{
+                    console.log(e)
+            })  
+                
             }
             else
             {
+
+                this.props.paso_examen(false)
+                evaluacion['aprobado']=false
+                evaluacion['intentos']=intentos+1;
+            
                 Alert.error('Reprobaste:', {
                     effect: 'slide',
                     timeout: 5000,
@@ -147,8 +157,28 @@ class ExamenPage extends Component {
                     }                   
                 });
 
-                 
-                    this.props.history.push(`/modulo${this.props.match.params.modulo_id}/tema${this.props.match.params.tema_id}/video${this.props.match.params.examen_id}`)       
+               
+                const userToken = JSON.parse(localStorage.getItem('userToken'));
+                let url = `http://127.0.0.1:8000/apis/evaluacion/${evaluacion.clase}/`
+                var request = new Request(url, {
+                    method: 'PUT',
+                    body: JSON.stringify(evaluacion),
+                    headers: new Headers({
+                        'Authorization': 'Token ' + userToken,
+                        'Content-Type': 'application/json'
+                    })
+                });
+                fetch(request)
+                .then(r=>r.json())
+                .then(data=>{
+                    console.log(data)
+                    this.setState({evaluacion:data})
+                    this.props.history.push(`/modulo${this.props.match.params.modulo_id}/tema${this.props.match.params.tema_id}/video${this.props.match.params.examen_id}`)                 
+                })
+                .catch(e=>{
+                    console.log(e)
+            })  
+                   
             }
        }
 
