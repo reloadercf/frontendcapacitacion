@@ -173,7 +173,7 @@ checkIfuser=()=>{
 
 logIn=(user)=>{
 //console.log(user)
-let url = 'http://127.0.0.1:8000/api-token-auth/';
+let url = 'https://infinite-peak-15466.herokuapp.com/api-token-auth/';
 var request = new Request(url, {
     method: 'POST',
     body: JSON.stringify(user),

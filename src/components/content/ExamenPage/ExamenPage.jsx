@@ -182,7 +182,7 @@ class ExamenPage extends Component {
        SendExamenDos=(e)=>{
         let{res_correctas, preguntas, evaluacion, intentos}=this.state
         const userToken = JSON.parse(localStorage.getItem('userToken'));
-        let url = `http://127.0.0.1:8000/my_evaluations/?e=${evaluacion.clase}`;
+        let url = `https://infinite-peak-15466.herokuapp.com/my_evaluations/?e=${evaluacion.clase}`;
         var request = new Request(url, {
             method: 'GET',
             headers:new Headers({
@@ -217,7 +217,7 @@ class ExamenPage extends Component {
                     eval_usuario['resultado']=res_correctas
                     eval_usuario['intentos']=(data[0].intentos+1)
                     const userToken = JSON.parse(localStorage.getItem('userToken'));
-                    let url = `http://127.0.0.1:8000/apis/evaluacion/${data[0].id}/`;
+                    let url =`https://infinite-peak-15466.herokuapp.com/apis/evaluacion/${data[0].id}/`;
                     var request = new Request(url, {
                         method: 'PUT',
                         body: JSON.stringify(eval_usuario),
@@ -259,7 +259,7 @@ class ExamenPage extends Component {
                     eval_usuario['resultado']=res_correctas
                     eval_usuario['intentos']=(data[0].intentos+1)
                     const userToken = JSON.parse(localStorage.getItem('userToken'));
-                    let url = `http://127.0.0.1:8000/apis/evaluacion/${data[0].id}/`;
+                    let url = `https://infinite-peak-15466.herokuapp.com/apis/evaluacion/${data[0].id}/`;
                     var request = new Request(url, {
                         method: 'PUT',
                         body: JSON.stringify(eval_usuario),
