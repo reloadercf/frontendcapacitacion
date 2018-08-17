@@ -98,7 +98,7 @@ export class Contenido extends Component {
 
 
   render() {
-     let {temas, id_modulo, do_evaluacion}=this.props
+     let {temas, id_modulo, do_evaluacion, user}=this.props
      let{evaluaciones}=this.state
     return (
       <Collapse
@@ -113,7 +113,7 @@ export class Contenido extends Component {
             {temas.map((i, key)=>(
                 <Panel header={i.title_tema}  key={key} style={customPanelStyle}>               
                     {i.tema_clase.map((c, key)=>(             
-                      <ContenidoCard {...c} register_class={this.register_class} id_tema={i.id} id_modulo={id_modulo} key={key} evaluaciones={evaluaciones} do_evaluacion={do_evaluacion}/>             
+                      <ContenidoCard {...c} user={user} register_class={this.register_class} id_tema={i.id} id_modulo={id_modulo} key={key} evaluaciones={evaluaciones} do_evaluacion={do_evaluacion}/>             
                     ))}                
                 </Panel>
             ))}    

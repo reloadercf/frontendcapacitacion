@@ -95,11 +95,9 @@ class ExamenPage extends Component {
 
        SendExamen=(e)=>{
            let{res_correctas, preguntas, evaluacion, intentos}=this.state
-           let usuario=this.props.user
-            evaluacion['usuario']=usuario.id
+            //let usuario=this.props.user
+            evaluacion['usuario']=this.props.user.id
             evaluacion['resultado']=res_correctas
-
-            
 
             if(res_correctas>=(preguntas.length-1))
             {
@@ -115,14 +113,13 @@ class ExamenPage extends Component {
                     
                 });
                 this.props.paso_examen(true)
+
                 evaluacion['aprobado']=true
                 evaluacion['intentos']=intentos+1;
-     
-
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
                 let url = "http://127.0.0.1:8000/apis/evaluacion/"
                 var request = new Request(url, {
-                    method: 'POST',
+                    method: 'PUT',
                     body: JSON.stringify(evaluacion),
                     headers: new Headers({
                         'Authorization': 'Token ' + userToken,
@@ -182,6 +179,89 @@ class ExamenPage extends Component {
             }
        }
 
+       SendExamenDos=(e)=>{
+        let{res_correctas, preguntas, evaluacion, intentos}=this.state
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+        let url = `http://127.0.0.1:8000/my_evaluations/?e=${evaluacion.clase}`;
+        var request = new Request(url, {
+            method: 'GET',
+            headers:new Headers({
+                'Authorization':'Token '+userToken,
+                'Content-Type': 'application/json'
+            }) 
+        });
+        fetch(request)
+            .then(r => r.json())
+            .then(data => {    
+                 
+                if(res_correctas>=(preguntas.length-1))
+                {
+                    let eval_usuario={}
+                    eval_usuario['clase']=evaluacion.clase
+                    eval_usuario['usuario']=this.props.user.id
+                    eval_usuario['aprobado']=true
+                    eval_usuario['resultado']=res_correctas
+                    eval_usuario['intentos']=(data[0].intentos+1)
+                    const userToken = JSON.parse(localStorage.getItem('userToken'));
+                    let url = `http://127.0.0.1:8000/apis/evaluacion/${data[0].id}/`;
+                    var request = new Request(url, {
+                        method: 'PUT',
+                        body: JSON.stringify(eval_usuario),
+                        headers: new Headers({
+                            'Authorization': 'Token ' + userToken,
+                            'Content-Type': 'application/json'
+                        })
+                    });
+                    fetch(request)
+                    .then(r=>r.json())
+                    .then(data=>{
+                        console.log(data) 
+                        console.log("Aprobaste") 
+                        this.props.history.push('/profile')   
+                    })
+                    .catch(e=>{
+                        console.log(e)
+    
+                    }) 
+                   
+              }      
+              else
+                {
+                    let eval_usuario={}
+                    eval_usuario['clase']=evaluacion.clase
+                    eval_usuario['usuario']=this.props.user.id
+                    eval_usuario['aprobado']=false
+                    eval_usuario['resultado']=res_correctas
+                    eval_usuario['intentos']=(data[0].intentos+1)
+                    const userToken = JSON.parse(localStorage.getItem('userToken'));
+                    let url = `http://127.0.0.1:8000/apis/evaluacion/${data[0].id}/`;
+                    var request = new Request(url, {
+                        method: 'PUT',
+                        body: JSON.stringify(eval_usuario),
+                        headers: new Headers({
+                            'Authorization': 'Token ' + userToken,
+                            'Content-Type': 'application/json'
+                        })
+                    });
+                    fetch(request)
+                    .then(r=>r.json())
+                    .then(data=>{
+                        console.log(data) 
+                        console.log("Reprobaste") 
+                        this.props.history.push(`/modulo${this.props.match.params.modulo_id}/tema${this.props.match.params.tema_id}/video${this.props.match.params.examen_id}`)      
+                    })
+                    .catch(e=>{
+                        console.log(e)
+                    })  
+    
+                }
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+
+
 
     render() {
         let{examen,  preguntas, respuesta}=this.state
@@ -194,7 +274,7 @@ class ExamenPage extends Component {
                 </Row>
                 <Row type="flex" justify="center">
                     <Col lg={21} md={20} xs={24}>
-                        <ExamenComponent onChange={this.onChange} SendExamen={this.SendExamen} respuesta={respuesta} examen={examen} preguntas={preguntas}/>            
+                        <ExamenComponent onChange={this.onChange} SendExamen={this.SendExamenDos} respuesta={respuesta} examen={examen} preguntas={preguntas}/>            
                     </Col>
                    
 
