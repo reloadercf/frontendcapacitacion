@@ -28,8 +28,6 @@ export class VideoComponent extends Component {
     {
       this.setState({ playing: !this.state.playing })
     }
-
-
     setVolume=(value) => {
       let vol=value/100
       this.setState({ volume:vol})
@@ -45,7 +43,6 @@ export class VideoComponent extends Component {
       this.setState({ seeking: false })
       this.player.seekTo(parseFloat(e.target.value))
     }
-  
 
     onProgress = state => {
       //console.log('onProgress', state)
@@ -54,15 +51,37 @@ export class VideoComponent extends Component {
         this.setState(state)
       }
     }
+    
+    RedirectModulo=()=>{
+        let{match, history}=this.props
+        let link = `/modulo${match.params.modulo_id}`
+        this.props.finish_class(this.props.subtema.id)
+        history.push(link)
+    }
 
+    onEndedVideo=()=>{
+      
+      
+            Alert.success('Felicidades:', {
+                effect: 'slide',
+                timeout: 5000,
+                position: 'top',
+                customFields: {
+                    customerName: "Felicidades has finalizado la clase te invitamos a realizar la evaluación para medir tus conosimientos",
+                    specialInfo: this.RedirectModulo(),
+                }
+            });
+
+    }
+   
     ref = player => {
         this.player = player
       }
   
     render() {
-        let {subtema, match, history}=this.props
+        let {subtema}=this.props
         let {playing, volume, played } = this.state
-        let link = `/modulo${match.params.modulo_id}/tema${match.params.tema_id}/examen${match.params.video_id}`
+   
         return (
             <div
             style={{
@@ -80,17 +99,7 @@ export class VideoComponent extends Component {
                 volume={volume}
                 width={"100%"}
                 height={"100%"}
-                onEnded={() => {
-                Alert.success('Felicidades:', {
-                    effect: 'slide',
-                    timeout: 5000,
-                    position: 'top',
-                    customFields: {
-                        customerName: "Es hora de probar que tanto aprendiste contesta esta pequeña evaluacion para medir tu desempeño"
-                    }
-                });
-                history.push(link)
-                }}
+                onEnded={this.onEndedVideo}
                 onProgress={this. onProgress}
                 loop={false}
            

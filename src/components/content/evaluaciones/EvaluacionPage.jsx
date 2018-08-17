@@ -19,7 +19,7 @@ class EvaluacionPage extends Component {
     get_evaluaciones=()=>{
 
         const userToken = JSON.parse(localStorage.getItem('userToken'));
-        let url = "https://infinite-peak-15466.herokuapp.com/my_evaluations/";
+        let url = "http://127.0.0.1:8000/my_evaluations/";
         var request = new Request(url, {
             method: 'GET',
             headers:new Headers({
@@ -41,15 +41,14 @@ class EvaluacionPage extends Component {
     render() {
         let{evaluaciones}=this.state
         return (
-            <Row justify={"center"} style={{height: "43vh"}}>
-                <Col lg={24} md={24} sm={24} xs={24}>                 
-                    {evaluaciones.map((i, key)=>(
-                         <div style={{marginBottom:"2em"}} key={key} >
+            <Row gutter={24} justify={"center"} style={{height: "43vh"}}>
+                {evaluaciones.map((i, key)=>(
+                <Col  lg={6} md={6} sm={12} xs={24} key={key}>                                   
+                         <div style={{marginBottom:"2em" }}  >
                             <EvaluacionComponent  {...i} /> 
-                         </div>
-                    
-                 ))}  
-                </Col>             
+                         </div>                             
+                </Col>  
+                ))}            
             </Row>
         );
     }

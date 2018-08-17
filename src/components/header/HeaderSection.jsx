@@ -5,6 +5,7 @@ export const HeaderSection=()=>{
     return(
         <div className="style-header">
            <img src={dipra} alt="" />
+           
         </div>
     )
 }

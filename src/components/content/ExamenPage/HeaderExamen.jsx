@@ -8,7 +8,7 @@ export const HeaderExamen=({examen})=>{
         <Card >
             <div>
                <h2>{examen.titulo_examen}</h2>
-               <p>Es hora de demostrar que tanto aprendiste del tema contesta la siguiente evaluació</p>
+               <p>Es hora de demostrar que tanto aprendiste del tema contesta la siguiente evaluación para medir tus resultados</p>
             </div>
         </Card>
 

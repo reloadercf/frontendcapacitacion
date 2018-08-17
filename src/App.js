@@ -16,6 +16,7 @@ import Routes from './Routes';
 const { Header, Content, Footer } = Layout;
 
 class App extends Component {
+
   state={
     modulos:[],
     logged:false,
@@ -23,9 +24,8 @@ class App extends Component {
     examen_past:false,
     examen_avalible:false,
     video_end:false
-
+    
 }
-
 componentWillMount(){
   this.checkIfuser()
   this.getmodulos()
@@ -37,10 +37,91 @@ paso_examen=(examen)=>{
   console.log(examen_past)
 }
 
+//esta funcion primero validamos que el state examen_avalible  este en false
+finish_class=(clase)=>
+{
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    let url = `http://127.0.0.1:8000/my_clases?s=${clase}`;
+    var request = new Request(url, {
+        method: 'GET',
+        headers:new Headers({
+            'Authorization':'Token '+userToken,
+            'Content-Type': 'application/json'
+        }) 
+    });
+    fetch(request)
+        .then(r => r.json())
+        .then(data => 
+        {     
+
+            let user_clase=data.find(p => {
+                return p.usuario == this.state.user.id
+            })
+            this.setState({video_end:user_clase.clase_finish})
+
+            user_clase['clase_finish']=true
+            //this.setState({video_end:true})
+            console.log(user_clase)
+            const userToken = JSON.parse(localStorage.getItem('userToken'));
+            let url = `http://127.0.0.1:8000/apis/clasesuser/${user_clase.id}/`
+            var request = new Request(url, {
+                method: 'PUT',
+                body: JSON.stringify(user_clase),
+                headers: new Headers({
+                    'Authorization': 'Token ' + userToken,
+                    'Content-Type': 'application/json'
+                })
+            });
+            fetch(request)
+            .then(r=>r.json())
+            .then(datados=>{    
+                console.log(datados)          
+            })
+         
+        })
+    
+
+  
+}
+
+do_evaluacion=(clase)=>{
+    if(this.state.video_end)
+    {    
+        let evaluacion={}
+        evaluacion['usuario']=this.state.user.id
+        evaluacion['clase']=clase
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+        let url = "http://127.0.0.1:8000/apis/evaluacion/"
+        var request = new Request(url, {
+            method: 'POST',
+            body: JSON.stringify(evaluacion),
+            headers: new Headers({
+                'Authorization': 'Token ' + userToken,
+                'Content-Type': 'application/json'
+            })
+        });
+        fetch(request)
+        .then(r=>r.json())
+        .then(data=>{
+            console.log(data) 
+            console.log("Se creo la evaluacion") 
+        })
+        .catch(e=>{
+            console.log(e)
+    })  
+
+    }
+    
+    else
+    {
+        console.log("necesitas ver el video")
+    }
+    
+}
 
 getmodulos=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "https://infinite-peak-15466.herokuapp.com/my_user/";
+    let url = "http://127.0.0.1:8000/my_user/";
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -53,33 +134,28 @@ getmodulos=()=>{
         .then(data => {    
             this.setState({modulos: data[0].modulos})
             this.setState({user:data[0].correo})
-            //console.log(data[0].correo)
-
-
+            //console.log(this.state.user)
         })
         .catch(e => {
-            //console.log(e)
         })
 }
 
 
 checkIfuser=()=>{
   let userToken = JSON.parse(localStorage.getItem('userToken'));
-  console.log(userToken)
+  //console.log(userToken)
     if (userToken) {
         this.setState({logged:true})
       }
     else
       {
         this.setState({logged:false})
-        //this.props.history.push('/')
       }
 
-    console.log(this.state.logged)
 }
 
 logIn=(user)=>{
-let url = 'https://infinite-peak-15466.herokuapp.com/api-token-auth/';
+let url = 'http://127.0.0.1:8000/api-token-auth/';
 var request = new Request(url, {
     method: 'POST',
     body: JSON.stringify(user),
@@ -125,9 +201,9 @@ logOut=()=>{
   render() {
       let {modulos,
            logged,
-           my_profile,
            examen_avalible,
-           user
+           user,
+           video_end
         }=this.state
     return (
       <Layout>
@@ -146,8 +222,12 @@ logOut=()=>{
                 examen_avalible={examen_avalible}
                 onEnded={this.onEnded}
                 user={user}
+                finish_class={this.finish_class}
+                do_evaluacion={this.do_evaluacion}
+                video_end={video_end}
+
             />
-             <Alert stack={{limit: 3}}contentTemplate={Main} />
+             <Alert stack={{limit: 3}} contentTemplate={Main} />
 
         </Content>
         <Footer  style={{ padding: 0, marginTop:"20vh"}} >
@@ -155,6 +235,8 @@ logOut=()=>{
         </Footer>
       </Layout>
     </Layout>
+
+    
     );
   }
 }

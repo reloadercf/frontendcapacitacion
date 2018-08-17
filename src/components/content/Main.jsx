@@ -1,7 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
 
-const Main = ({id,classNames,styles,message,customFields,handleClose,resultados}) => 
+const Main = ({id,classNames,styles,message,customFields,handleClose}) => 
 {
 
   return (
@@ -11,6 +10,7 @@ const Main = ({id,classNames,styles,message,customFields,handleClose,resultados}
         {/* <h3>Tu resultado fue de: {resultados}  aciertos</h3> */}
       </div>
       <h3 className="">{customFields.customerName}</h3>
+  
       <span className='s-alert-close' onClick={handleClose}></span>
     </div>
   );

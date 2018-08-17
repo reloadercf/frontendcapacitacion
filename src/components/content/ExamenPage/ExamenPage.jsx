@@ -25,10 +25,11 @@ class ExamenPage extends Component {
           this.getModulo()
       }
 
+      //Con esta funcion obtenemos el modulo en el cual estamos
       getModulo = () => {
         let{evaluacion}=this.state
-        let modulos=this.props.modulos
-        let url = "https://infinite-peak-15466.herokuapp.com/apis/modulo/";
+        //let modulos=this.props.modulos
+        let url = "http://127.0.0.1:8000/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',
             headers: new Headers({'Content-Type': 'application/json'})
@@ -51,14 +52,11 @@ class ExamenPage extends Component {
 
                 let examen_clase=subtema_tema[0].nombre_examen
                 
+
                 evaluacion['clase']=subtema_tema[0].id
                 this.setState({evaluacion})
-    
-
                 this.setState({examen:examen_clase})
                 this.setState({preguntas:examen_clase.pregunta_examen})
-
-
                   console.log(subtema_tema[0].nombre_examen)
                   console.log(examen_clase.pregunta_examen)
                
@@ -102,7 +100,7 @@ class ExamenPage extends Component {
             evaluacion['resultado']=res_correctas
 
             
-            
+
             if(res_correctas>=(preguntas.length-1))
             {
                 Alert.success('Felicidades:', {
@@ -119,10 +117,10 @@ class ExamenPage extends Component {
                 this.props.paso_examen(true)
                 evaluacion['aprobado']=true
                 evaluacion['intentos']=intentos+1;
-                this.setState(evaluacion)
-                
+     
+
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
-                let url = 'https://infinite-peak-15466.herokuapp.com/my_evaluations/'
+                let url = "http://127.0.0.1:8000/apis/evaluacion/"
                 var request = new Request(url, {
                     method: 'POST',
                     body: JSON.stringify(evaluacion),
@@ -131,10 +129,25 @@ class ExamenPage extends Component {
                         'Content-Type': 'application/json'
                     })
                 });
-    
-                this.props.history.push('/profile')  
+                fetch(request)
+                .then(r=>r.json())
+                .then(data=>{
+                    console.log(data)
+                    this.props.history.push('/profile')  
+                    this.setState({evaluacion:data})          
+                })
+                .catch(e=>{
+                    console.log(e)
+            })  
+                
             }
-            else{
+            else
+            {
+
+                this.props.paso_examen(false)
+                evaluacion['aprobado']=false
+                evaluacion['intentos']=intentos+1;
+            
                 Alert.error('Reprobaste:', {
                     effect: 'slide',
                     timeout: 5000,
@@ -144,24 +157,28 @@ class ExamenPage extends Component {
                     }                   
                 });
 
-                this.props.paso_examen(false)
-                let nuevo_intento=intentos+1
-                console.log(nuevo_intento)
-                this.setState({intentos:nuevo_intento})
-                console.log(intentos)
-
+               
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
-                let url = 'https://infinite-peak-15466.herokuapp.com/my_evaluations/'
+                let url = `http://127.0.0.1:8000/apis/evaluacion/${evaluacion.clase}/`
                 var request = new Request(url, {
-                    method: 'GET',
+                    method: 'PUT',
                     body: JSON.stringify(evaluacion),
                     headers: new Headers({
                         'Authorization': 'Token ' + userToken,
                         'Content-Type': 'application/json'
                     })
                 });
-                 
-                    this.props.history.push(`/modulo${this.props.match.params.modulo_id}/tema${this.props.match.params.tema_id}/video${this.props.match.params.examen_id}`)       
+                fetch(request)
+                .then(r=>r.json())
+                .then(data=>{
+                    console.log(data)
+                    this.setState({evaluacion:data})
+                    this.props.history.push(`/modulo${this.props.match.params.modulo_id}/tema${this.props.match.params.tema_id}/video${this.props.match.params.examen_id}`)                 
+                })
+                .catch(e=>{
+                    console.log(e)
+            })  
+                   
             }
        }
 
