@@ -196,6 +196,20 @@ class ExamenPage extends Component {
                  
                 if(res_correctas>=(preguntas.length-1))
                 {
+                    Alert.success('Felicidades:', {
+                        effect: 'slide',
+                        timeout: 5000,
+                        position: 'top',
+                     
+                        customFields: {
+                            customerName: "Felicidaddes aprobaste el examen puedes pasar al siguiente modulo ",
+                            resultados: res_correctas
+                        }
+                        
+                    });
+                    this.props.paso_examen(true)
+    
+                    
                     let eval_usuario={}
                     eval_usuario['clase']=evaluacion.clase
                     eval_usuario['usuario']=this.props.user.id
@@ -227,6 +241,17 @@ class ExamenPage extends Component {
               }      
               else
                 {
+                    Alert.error('Reprobaste:', {
+                        effect: 'slide',
+                        timeout: 5000,
+                        position: 'top',         
+                        customFields: {
+                            customerName: "Reprobaste el modulo te invito a repetir nuevamente la clase, exito",
+                        }                   
+                    });
+
+
+    
                     let eval_usuario={}
                     eval_usuario['clase']=evaluacion.clase
                     eval_usuario['usuario']=this.props.user.id
