@@ -38,7 +38,8 @@ export class ContenidoCard extends Component
             })
   
       }
-    
+
+      
 
     render() 
     {

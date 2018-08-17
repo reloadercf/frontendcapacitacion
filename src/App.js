@@ -23,12 +23,15 @@ class App extends Component {
     user:{},
     examen_past:false,
     examen_avalible:false,
-    video_end:false
-    
+    video_end:false   
 }
 componentWillMount(){
   this.checkIfuser()
-  this.getmodulos()
+  
+}
+
+componentDidMount(){
+this.getmodulos()
 }
 
 paso_examen=(examen)=>{
@@ -57,10 +60,9 @@ finish_class=(clase)=>
             let user_clase=data.find(p => {
                 return p.usuario == this.state.user.id
             })
-            this.setState({video_end:user_clase.clase_finish})
-
+            //this.setState({video_end:user_clase.clase_finish})
             user_clase['clase_finish']=true
-            //this.setState({video_end:true})
+            this.setState({video_end:true})
             console.log(user_clase)
             const userToken = JSON.parse(localStorage.getItem('userToken'));
             let url = `https://infinite-peak-15466.herokuapp.com/apis/clasesuser/${user_clase.id}/`
@@ -85,40 +87,55 @@ finish_class=(clase)=>
 }
 
 do_evaluacion=(clase)=>{
-    if(this.state.video_end)
-    {    
-        let evaluacion={}
-        evaluacion['usuario']=this.state.user.id
-        evaluacion['clase']=clase
-        const userToken = JSON.parse(localStorage.getItem('userToken'));
-        let url = "https://infinite-peak-15466.herokuapp.com/apis/evaluacion/"
-        var request = new Request(url, {
-            method: 'POST',
-            body: JSON.stringify(evaluacion),
-            headers: new Headers({
-                'Authorization': 'Token ' + userToken,
-                'Content-Type': 'application/json'
-            })
-        });
-        fetch(request)
-        .then(r=>r.json())
-        .then(data=>{
-            console.log(data) 
-            console.log("Se creo la evaluacion") 
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    let url = `http://127.0.0.1:8000/my_evaluations/?e=${clase}`;
+    var request = new Request(url, {
+        method: 'GET',
+        headers:new Headers({
+            'Authorization':'Token '+userToken,
+            'Content-Type': 'application/json'
+        }) 
+    });
+    fetch(request)
+        .then(r => r.json())
+        .then(data => {
+
+            if(data.length==0)
+            {
+                let evaluacion={}
+                evaluacion['usuario']=this.state.user.id
+                evaluacion['clase']=clase
+                const userToken = JSON.parse(localStorage.getItem('userToken'));
+                let url = "http://127.0.0.1:8000/apis/evaluacion/"
+                var request = new Request(url, {
+                    method: 'POST',
+                    body: JSON.stringify(evaluacion),
+                    headers: new Headers({
+                        'Authorization': 'Token ' + userToken,
+                        'Content-Type': 'application/json'
+                    })
+                });
+                fetch(request)
+                .then(r=>r.json())
+                .then(data=>{
+                    console.log(data) 
+                    console.log("Se creo la evaluacion") 
+                })
+                .catch(e=>{
+                    console.log(e)
+
+                })  
+          }      
+          else
+            {
+
+            }
         })
-        .catch(e=>{
+        .catch(e => {
             console.log(e)
-    })  
-
-    }
-    
-    else
-    {
-        console.log("necesitas ver el video")
-    }
-    
+        })
 }
-
+    
 getmodulos=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
     let url = "https://infinite-peak-15466.herokuapp.com/my_user/";
@@ -155,7 +172,8 @@ checkIfuser=()=>{
 }
 
 logIn=(user)=>{
-let url = 'https://infinite-peak-15466.herokuapp.com/api-token-auth/';
+//console.log(user)
+let url = 'http://127.0.0.1:8000/api-token-auth/';
 var request = new Request(url, {
     method: 'POST',
     body: JSON.stringify(user),
@@ -171,9 +189,10 @@ fetch(request)
         //console.log(r.json())            
     })
     .then(data=>{
-        //console.log(data)
+        console.log(data)
         localStorage.setItem('userToken', JSON.stringify(data.token));
         //this.props.history.push('/profile')
+        this.getmodulos()
         this.setState({logged:true})
     })
     .catch(e=>{

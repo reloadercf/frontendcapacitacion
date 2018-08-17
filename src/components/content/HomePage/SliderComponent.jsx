@@ -12,7 +12,7 @@ class SliderComponent extends Component {
             autoplay: true,
             autoplaySpeed: 4000,
             cssEase: "linear",
-            pauseOnHover: true
+          
         };
         return (
             <div style={{
