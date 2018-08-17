@@ -57,7 +57,7 @@ export class VideoPage extends Component {
 
     render() {
         let {modulo, tema, subtema} = this.state
-        let {match,history,finish_class} = this.props
+        let {match,history,finish_class,video_end} = this.props
         return (
             <div>
                 <Row type="flex" justify="start">
@@ -72,6 +72,7 @@ export class VideoPage extends Component {
                             history={history}
                             subtema={subtema}
                             finish_class={finish_class}
+                            video_end={video_end}
                             />
                     </Col>
                 </Row>

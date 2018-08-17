@@ -12,13 +12,15 @@ const customPanelStyle = {
 };
 
 export class Contenido extends Component {
-
    state={
-     evaluaciones:[]
+     evaluaciones:[],
+     clases_finish:null,
+     clases_avalible:false
    }
    
-   componentWillMount(){
-     this.get_evaluaciones()
+   componentWillMount()
+   {
+      this.get_evaluaciones()
    }
 
    get_evaluaciones=()=>{
@@ -42,10 +44,62 @@ export class Contenido extends Component {
         })
     }
 
+
+
+    register_class=(clase)=>{
+      const userToken = JSON.parse(localStorage.getItem('userToken'));
+      let url = `http://127.0.0.1:8000/my_clases?s=${clase}`;
+      var request = new Request(url, {
+          method: 'GET',
+          headers:new Headers({
+              'Authorization':'Token '+userToken,
+              'Content-Type': 'application/json'
+          }) 
+      });
+      fetch(request)
+          .then(r => r.json())
+          .then(data => {
+            if(data.length==0)
+            {
+              let clase_usuario ={}
+              clase_usuario['clase']=clase    
+              clase_usuario['usuario']=this.props.user.id
+              const userToken = JSON.parse(localStorage.getItem('userToken'));
+              let url = "http://127.0.0.1:8000/apis/clasesuser/"
+              var request = new Request(url, {
+                  method: 'POST',
+                  body: JSON.stringify(clase_usuario),
+                  headers: new Headers({
+                      'Authorization': 'Token ' + userToken,
+                      'Content-Type': 'application/json'
+                  })
+              });
+              fetch(request)
+              .then(r=>r.json())
+              .then(data=>
+              {
+                  console.log("se creo la clase para el usuario") 
+              })
+              .catch(e=>{
+                  console.log(e)
+            })
+          }      
+          else
+           {
+
+            }
+          })
+          .catch(e => {
+            console.log(e)
+          })
+       
+
+    }
+
+
   render() {
      let {temas, id_modulo, do_evaluacion}=this.props
      let{evaluaciones}=this.state
-  
     return (
       <Collapse
         bordered={false}
@@ -59,7 +113,7 @@ export class Contenido extends Component {
             {temas.map((i, key)=>(
                 <Panel header={i.title_tema}  key={key} style={customPanelStyle}>               
                     {i.tema_clase.map((c, key)=>(             
-                      <ContenidoCard {...c}  id_tema={i.id} id_modulo={id_modulo} key={key} evaluaciones={evaluaciones} do_evaluacion={do_evaluacion}/>             
+                      <ContenidoCard {...c} register_class={this.register_class} id_tema={i.id} id_modulo={id_modulo} key={key} evaluaciones={evaluaciones} do_evaluacion={do_evaluacion}/>             
                     ))}                
                 </Panel>
             ))}    

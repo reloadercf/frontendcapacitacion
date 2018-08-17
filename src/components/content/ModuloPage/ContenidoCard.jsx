@@ -1,44 +1,101 @@
-import React from 'react'
-import {Button,Icon} from 'antd';
-import {Link, } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Button} from 'antd';
+import {Link} from 'react-router-dom';
+
+export class ContenidoCard extends Component 
+{
+
+    state={
+        clases_finish:null
+    }
 
 
-export const ContenidoCard = ({id, title_clase, id_tema, id_modulo,do_evaluacion}) => {
     
-    // let get_evaluacion=evaluaciones.find(p => {
-    //     return p.clase.title_clase == title_clase;
-    // })
-    // console.log(get_evaluacion)
+    componentWillMount() {
+        this.get_status_clase()
+    }
+    
 
-    return (
-        <div className="div-subtema">
-            <div className="info-subtema">
-                <h3>{id}: {title_clase}</h3>
-            </div>
-            <div style={{display:"flex", alignItems:"center"}}>
+    get_status_clase=()=>{
+        const userToken = JSON.parse(localStorage.getItem('userToken'));
+        let url = `http://127.0.0.1:8000/my_clases?s=${this.props.id}`;
+        var request = new Request(url, {
+            method: 'GET',
+            headers:new Headers({
+                'Authorization':'Token '+userToken,
+                'Content-Type': 'application/json'
+            }) 
+        });
+        fetch(request)
+            .then(r => r.json())
+            .then(data => {
+                console.log(data[0].clase_finish)
+                this.setState({clases_finish:data[0].clase_finish})  
+                //return data[0].clase_finish      
+            })
+            .catch(e => {
+                //console.log(e)
+            })
+  
+      }
+    
 
-                      {/* {get_evaluacion.aprobado
-                        ?    <Icon type="check-circle" style={{fontSize:"30px", color:"#2eb872", marginRight:"2em"}}/>
+    render() 
+    {
+        let{ id,
+            title_clase,
+            id_tema,
+            id_modulo,
+            do_evaluacion,
+            register_class,
+            }=this.props
 
-                        :   <Link  to={`/modulo${id_modulo}/tema${id_tema}/examen${id}`}>
-                                <Button style={{ marginRight: "10px"}} type="primary" icon="search">Examen</Button>          
+
+        return (
+
+            <div className="div-subtema">
+
+                <div className="info-subtema">
+                    <h3>{id}: {title_clase}</h3>
+                </div>
+                <div
+                    style={{
+                    display: "flex",
+                    alignItems: "center"
+                }}>
+
+                    {this.state.clases_finish
+                        ? <Link to={`/modulo${id_modulo}/tema${id_tema}/examen${id}`}>
+                                <Button
+                                    onClick={() => do_evaluacion(id)}
+                                    style={{
+                                    marginRight: "10px"
+                                }}
+                                    type="primary"
+                                    icon="search">Examen</Button>
                             </Link>
-                        }
-                
-                 */}
-                
-                <Link  to={`/modulo${id_modulo}/tema${id_tema}/examen${id}`}>
-                    <Button onClick={()=> do_evaluacion(id)}  style={{ marginRight: "10px"}} type="primary" icon="search">Examen</Button>          
-                </Link>
-                <Link to={`/modulo${id_modulo}/tema${id_tema}/video${id}`}> 
-                    <Button type="primary" icon="search">Video</Button>
-                </Link>
 
-               
+                        : <Link to={`/modulo${id_modulo}/tema${id_tema}/examen${id}`}>
+                            <Button
+                                onClick={() => do_evaluacion(id)}
+                                style={{
+                                marginRight: "10px"
+                            }}
+                                type="primary"
+                                icon="search"
+                                disabled>Examen</Button>
+                        </Link>
+                    }
 
-           
+                    <Link to={`/modulo${id_modulo}/tema${id_tema}/video${id}`}>
+                        <Button onClick={() => register_class(id)} type="primary" icon="search">Video</Button>
+                    </Link>
+
+                </div>
+
             </div>
 
-        </div>
-    )
-} 
+        );
+    }
+}
+

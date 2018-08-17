@@ -28,7 +28,7 @@ class ExamenPage extends Component {
       //Con esta funcion obtenemos el modulo en el cual estamos
       getModulo = () => {
         let{evaluacion}=this.state
-        let modulos=this.props.modulos
+        //let modulos=this.props.modulos
         let url = "http://127.0.0.1:8000/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',

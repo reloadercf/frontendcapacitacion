@@ -16,6 +16,7 @@ import Routes from './Routes';
 const { Header, Content, Footer } = Layout;
 
 class App extends Component {
+
   state={
     modulos:[],
     logged:false,
@@ -25,7 +26,6 @@ class App extends Component {
     video_end:false
     
 }
-
 componentWillMount(){
   this.checkIfuser()
   this.getmodulos()
@@ -38,17 +38,55 @@ paso_examen=(examen)=>{
 }
 
 //esta funcion primero validamos que el state examen_avalible  este en false
-finish_class=()=>{
-    this.setState({video_end:true})
-    console.log(this.state.video_end)
+finish_class=(clase)=>
+{
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    let url = `http://127.0.0.1:8000/my_clases?s=${clase}`;
+    var request = new Request(url, {
+        method: 'GET',
+        headers:new Headers({
+            'Authorization':'Token '+userToken,
+            'Content-Type': 'application/json'
+        }) 
+    });
+    fetch(request)
+        .then(r => r.json())
+        .then(data => 
+        {     
+
+            let user_clase=data.find(p => {
+                return p.usuario == this.state.user.id
+            })
+            this.setState({video_end:user_clase.clase_finish})
+
+            user_clase['clase_finish']=true
+            //this.setState({video_end:true})
+            console.log(user_clase)
+            const userToken = JSON.parse(localStorage.getItem('userToken'));
+            let url = `http://127.0.0.1:8000/apis/clasesuser/${user_clase.id}/`
+            var request = new Request(url, {
+                method: 'PUT',
+                body: JSON.stringify(user_clase),
+                headers: new Headers({
+                    'Authorization': 'Token ' + userToken,
+                    'Content-Type': 'application/json'
+                })
+            });
+            fetch(request)
+            .then(r=>r.json())
+            .then(datados=>{    
+                console.log(datados)          
+            })
+         
+        })
+    
+
+  
 }
 
 do_evaluacion=(clase)=>{
-    let{video_end}=this.state
-   
-    if(video_end)
+    if(this.state.video_end)
     {    
-
         let evaluacion={}
         evaluacion['usuario']=this.state.user.id
         evaluacion['clase']=clase
@@ -71,16 +109,15 @@ do_evaluacion=(clase)=>{
         .catch(e=>{
             console.log(e)
     })  
+
     }
-    else{
+    
+    else
+    {
         console.log("necesitas ver el video")
     }
     
 }
-
-
-
-
 
 getmodulos=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -97,7 +134,7 @@ getmodulos=()=>{
         .then(data => {    
             this.setState({modulos: data[0].modulos})
             this.setState({user:data[0].correo})
-            console.log(this.state.user)
+            //console.log(this.state.user)
         })
         .catch(e => {
         })
@@ -106,17 +143,15 @@ getmodulos=()=>{
 
 checkIfuser=()=>{
   let userToken = JSON.parse(localStorage.getItem('userToken'));
-  console.log(userToken)
+  //console.log(userToken)
     if (userToken) {
         this.setState({logged:true})
       }
     else
       {
         this.setState({logged:false})
-        //this.props.history.push('/')
       }
 
-    console.log(this.state.logged)
 }
 
 logIn=(user)=>{
@@ -166,9 +201,9 @@ logOut=()=>{
   render() {
       let {modulos,
            logged,
-           my_profile,
            examen_avalible,
-           user
+           user,
+           video_end
         }=this.state
     return (
       <Layout>
@@ -189,6 +224,7 @@ logOut=()=>{
                 user={user}
                 finish_class={this.finish_class}
                 do_evaluacion={this.do_evaluacion}
+                video_end={video_end}
 
             />
              <Alert stack={{limit: 3}} contentTemplate={Main} />

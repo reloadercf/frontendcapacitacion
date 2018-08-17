@@ -55,25 +55,25 @@ export class VideoComponent extends Component {
     RedirectModulo=()=>{
         let{match, history}=this.props
         let link = `/modulo${match.params.modulo_id}`
-        this.props.finish_class()
+        this.props.finish_class(this.props.subtema.id)
         history.push(link)
-
     }
 
     onEndedVideo=()=>{
-        Alert.success('Felicidades:', {
-            effect: 'slide',
-            timeout: 5000,
-            position: 'top',
-            customFields: {
-                customerName: "Felicidades has terminado tu examen",
-                specialInfo: this.RedirectModulo(),
-            }
-    });
-    
+      
+      
+            Alert.success('Felicidades:', {
+                effect: 'slide',
+                timeout: 5000,
+                position: 'top',
+                customFields: {
+                    customerName: "Felicidades has finalizado la clase te invitamos a realizar la evaluación para medir tus conosimientos",
+                    specialInfo: this.RedirectModulo(),
+                }
+            });
+
     }
    
-
     ref = player => {
         this.player = player
       }

@@ -18,6 +18,7 @@ class Routes extends React.Component{
                 user,
                 finish_class,
                 do_evaluacion,
+                video_end,
 
                 paso_examen,
                 examen_avalible
@@ -28,10 +29,11 @@ class Routes extends React.Component{
                 <Route exact path="/" component={HomePage}  />  
                 <Route path="/login" render={props =>(logged?<Redirect to="/profile" />:<LogUserPage {...props} logIn={logIn}/>)}/>    
                 <Route path="/profile" render={()=>(logged?<ProfilePage modulos={modulos} />:<Redirect to="/"/>)}/> 
-                <Route exact path="/modulo:modulo_id" render={props=>(logged?<DetailPage {...props}  modulos={modulos} examen_avalible={examen_avalible} do_evaluacion={do_evaluacion}/>:<Redirect to="/"/>)}/>  
+                <Route exact path="/modulo:modulo_id" render={props=>(logged?<DetailPage {...props}  modulos={modulos} user={user} examen_avalible={examen_avalible} do_evaluacion={do_evaluacion}/>:<Redirect to="/"/>)}/>  
                 <Route exact path="/modulo:modulo_id/tema:tema_id/video:video_id"   render={props=>(logged?<VideoPage 
                     {...props} 
-                    finish_class={finish_class}  
+                    finish_class={finish_class} 
+                    video_end={video_end} 
                     modulos={modulos} 
                     />:<Redirect to="/"/>)}/> 
 
