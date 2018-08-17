@@ -19,7 +19,7 @@ class DetailPage extends Component {
 
     getModulo=()=>{
         //const userToken = JSON.parse(localStorage.getItem('userRanchoToken'));
-        let url = "http://127.0.0.1:8000/apis/modulo/";
+        let url = "https://infinite-peak-15466.herokuapp.com/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',
             headers: new Headers({'Content-Type': 'application/json'})

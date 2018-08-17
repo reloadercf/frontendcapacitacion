@@ -88,7 +88,7 @@ finish_class=(clase)=>
 
 do_evaluacion=(clase)=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = `http://127.0.0.1:8000/my_evaluations/?e=${clase}`;
+    let url = `https://infinite-peak-15466.herokuapp.com/my_evaluations/?e=${clase}`;
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -106,7 +106,7 @@ do_evaluacion=(clase)=>{
                 evaluacion['usuario']=this.state.user.id
                 evaluacion['clase']=clase
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
-                let url = "http://127.0.0.1:8000/apis/evaluacion/"
+                let url = "https://infinite-peak-15466.herokuapp.com/apis/evaluacion/"
                 var request = new Request(url, {
                     method: 'POST',
                     body: JSON.stringify(evaluacion),
