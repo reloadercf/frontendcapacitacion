@@ -25,7 +25,7 @@ export class Contenido extends Component {
 
    get_evaluaciones=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "http://127.0.0.1:8000/my_evaluations/";
+    let url = "https://infinite-peak-15466.herokuapp.com/my_evaluations/";
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -48,7 +48,7 @@ export class Contenido extends Component {
 
     register_class=(clase)=>{
       const userToken = JSON.parse(localStorage.getItem('userToken'));
-      let url = `http://127.0.0.1:8000/my_clases?s=${clase}`;
+      let url = `https://infinite-peak-15466.herokuapp.com/my_clases?s=${clase}`;
       var request = new Request(url, {
           method: 'GET',
           headers:new Headers({
@@ -65,7 +65,7 @@ export class Contenido extends Component {
               clase_usuario['clase']=clase    
               clase_usuario['usuario']=this.props.user.id
               const userToken = JSON.parse(localStorage.getItem('userToken'));
-              let url = "http://127.0.0.1:8000/apis/clasesuser/"
+              let url = "https://infinite-peak-15466.herokuapp.com/apis/clasesuser/"
               var request = new Request(url, {
                   method: 'POST',
                   body: JSON.stringify(clase_usuario),

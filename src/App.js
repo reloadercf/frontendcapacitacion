@@ -41,7 +41,7 @@ paso_examen=(examen)=>{
 finish_class=(clase)=>
 {
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = `http://127.0.0.1:8000/my_clases?s=${clase}`;
+    let url = `https://infinite-peak-15466.herokuapp.com/my_clases?s=${clase}`;
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -63,7 +63,7 @@ finish_class=(clase)=>
             //this.setState({video_end:true})
             console.log(user_clase)
             const userToken = JSON.parse(localStorage.getItem('userToken'));
-            let url = `http://127.0.0.1:8000/apis/clasesuser/${user_clase.id}/`
+            let url = `https://infinite-peak-15466.herokuapp.com/apis/clasesuser/${user_clase.id}/`
             var request = new Request(url, {
                 method: 'PUT',
                 body: JSON.stringify(user_clase),
@@ -91,7 +91,7 @@ do_evaluacion=(clase)=>{
         evaluacion['usuario']=this.state.user.id
         evaluacion['clase']=clase
         const userToken = JSON.parse(localStorage.getItem('userToken'));
-        let url = "http://127.0.0.1:8000/apis/evaluacion/"
+        let url = "https://infinite-peak-15466.herokuapp.com/apis/evaluacion/"
         var request = new Request(url, {
             method: 'POST',
             body: JSON.stringify(evaluacion),
@@ -121,7 +121,7 @@ do_evaluacion=(clase)=>{
 
 getmodulos=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "http://127.0.0.1:8000/my_user/";
+    let url = "https://infinite-peak-15466.herokuapp.com/my_user/";
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -155,7 +155,7 @@ checkIfuser=()=>{
 }
 
 logIn=(user)=>{
-let url = 'http://127.0.0.1:8000/api-token-auth/';
+let url = 'https://infinite-peak-15466.herokuapp.com/api-token-auth/';
 var request = new Request(url, {
     method: 'POST',
     body: JSON.stringify(user),
