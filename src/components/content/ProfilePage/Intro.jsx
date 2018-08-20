@@ -2,7 +2,11 @@ import React from 'react'
 import { Card } from 'antd';
 
 
+
+
 export const Intro=({my_profile})=>{
+
+    //console.log(my_profile.correo)
 
     return(
         <Card >

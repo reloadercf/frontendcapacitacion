@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Row, Col} from 'antd';
 import {Intro} from './Intro';
 import ModulosList from './ModulosList';
-import { Buscador } from './Buscador';
+//import { Buscador } from './Buscador';
 
 class ProfilePage extends Component {
     state={
@@ -11,9 +11,10 @@ class ProfilePage extends Component {
     }
       componentWillMount(){
         this.get_myprofile()
+        //this.props.getmodulos()
+        //this.get_permissions()
       }
 
-      
     get_myprofile=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
     let url = "http://127.0.0.1:8000/my_user/";
@@ -30,14 +31,13 @@ class ProfilePage extends Component {
             this.setState({my_profile: data[0]})
             this.setState({modulos: data[0].modulos})
             console.log(this.state.my_profile)
-            console.log(data[0].modulos)
 
         })
         .catch(e => {
             //console.log(e)
         })
     }
-    
+
     render() 
     {
         //console.log(my_profile)
@@ -50,9 +50,9 @@ class ProfilePage extends Component {
                     </Col>
                 </Row>
                 <Row type="flex" justify="start">
-                    <Col lg={24} md={24} xs={24}>
+                    {/* <Col lg={24} md={24} xs={24}>
                         <Buscador/>              
-                    </Col>
+                    </Col> */}
                     <Col lg={24} md={24}>
                         <ModulosList modulos={modulos} />
                     </Col>

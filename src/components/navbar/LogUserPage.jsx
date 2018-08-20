@@ -4,23 +4,9 @@ import WrappedNormalLoginForm from './LoginForm';
 class LogUserPage extends Component {
 
     state={
-        user:{}, 
-    
+        user:{},  
     }
 
-    // handleText=(e)=>{
-    //     let {user} = this.state;
-    //     let field = e.target.name;
-    //     user[field] = e.target.value;
-    //     this.setState({user})
-    // }
-
-    
-    // logInUser=(e)=>{
-    //     e.preventDefault()
-    //     this.props.logIn(this.state.user)
-    // }
-    
     render() {
 
         let {user} = this.state;

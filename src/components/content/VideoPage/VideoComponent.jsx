@@ -64,10 +64,10 @@ export class VideoComponent extends Component {
       
             Alert.success('Felicidades:', {
                 effect: 'slide',
-                timeout: 5000,
+                timeout: 3000,
                 position: 'top',
                 customFields: {
-                    customerName: "Felicidades has finalizado la clase te invitamos a realizar la evaluación para medir tus conosimientos",
+                    customerName: "Felicidades has finalizado la clase, te invitamos a realizar la evaluación para medir tus conocimientos",
                     specialInfo: this.RedirectModulo(),
                 }
             });
