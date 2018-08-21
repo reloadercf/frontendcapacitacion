@@ -44,7 +44,7 @@ paso_examen=(examen)=>{
 finish_class=(clase)=>
 {
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = `https://infinite-peak-15466.herokuapp.com/my_clases?s=${clase}`;
+    let url = `https://fierce-tundra-88302.herokuapp.com/my_clases?s=${clase}`;
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -65,7 +65,7 @@ finish_class=(clase)=>
             this.setState({video_end:true})
             console.log(user_clase)
             const userToken = JSON.parse(localStorage.getItem('userToken'));
-            let url = `https://infinite-peak-15466.herokuapp.com/apis/clasesuser/${user_clase.id}/`
+            let url = `https://fierce-tundra-88302.herokuapp.com/apis/clasesuser/${user_clase.id}/`
             var request = new Request(url, {
                 method: 'PUT',
                 body: JSON.stringify(user_clase),
@@ -88,7 +88,7 @@ finish_class=(clase)=>
 
 do_evaluacion=(clase)=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = `https://infinite-peak-15466.herokuapp.com/my_evaluations/?e=${clase}`;
+    let url = `https://fierce-tundra-88302.herokuapp.com/my_evaluations/?e=${clase}`;
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -106,7 +106,7 @@ do_evaluacion=(clase)=>{
                 evaluacion['usuario']=this.state.user.id
                 evaluacion['clase']=clase
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
-                let url = "https://infinite-peak-15466.herokuapp.com/apis/evaluacion/"
+                let url = "https://fierce-tundra-88302.herokuapp.com/apis/evaluacion/"
                 var request = new Request(url, {
                     method: 'POST',
                     body: JSON.stringify(evaluacion),
@@ -138,7 +138,7 @@ do_evaluacion=(clase)=>{
     
 getmodulos=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "https://infinite-peak-15466.herokuapp.com/my_user/";
+    let url = "https://fierce-tundra-88302.herokuapp.com/my_user/";
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -173,7 +173,7 @@ checkIfuser=()=>{
 
 logIn=(user)=>{
 //console.log(user)
-let url = 'https://infinite-peak-15466.herokuapp.com/api-token-auth/';
+let url = 'https://fierce-tundra-88302.herokuapp.com/api-token-auth/';
 var request = new Request(url, {
     method: 'POST',
     body: JSON.stringify(user),

@@ -29,7 +29,7 @@ class ExamenPage extends Component {
       getModulo = () => {
         let{evaluacion}=this.state
         //let modulos=this.props.modulos
-        let url = "https://infinite-peak-15466.herokuapp.com/apis/modulo/";
+        let url = "https://fierce-tundra-88302.herokuapp.com/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',
             headers: new Headers({'Content-Type': 'application/json'})
@@ -117,7 +117,7 @@ class ExamenPage extends Component {
                 evaluacion['aprobado']=true
                 evaluacion['intentos']=intentos+1;
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
-                let url = "https://infinite-peak-15466.herokuapp.com/apis/evaluacion/"
+                let url = "https://fierce-tundra-88302.herokuapp.com/apis/evaluacion/"
                 var request = new Request(url, {
                     method: 'PUT',
                     body: JSON.stringify(evaluacion),
@@ -156,7 +156,7 @@ class ExamenPage extends Component {
 
                
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
-                let url = `https://infinite-peak-15466.herokuapp.com/apis/evaluacion/${evaluacion.clase}/`
+                let url = `https://fierce-tundra-88302.herokuapp.com/apis/evaluacion/${evaluacion.clase}/`
                 var request = new Request(url, {
                     method: 'PUT',
                     body: JSON.stringify(evaluacion),
@@ -182,7 +182,7 @@ class ExamenPage extends Component {
        SendExamenDos=(e)=>{
         let{res_correctas, preguntas, evaluacion, intentos}=this.state
         const userToken = JSON.parse(localStorage.getItem('userToken'));
-        let url = `https://infinite-peak-15466.herokuapp.com/my_evaluations/?e=${evaluacion.clase}`;
+        let url = `https://fierce-tundra-88302.herokuapp.com/my_evaluations/?e=${evaluacion.clase}`;
         var request = new Request(url, {
             method: 'GET',
             headers:new Headers({
@@ -217,7 +217,7 @@ class ExamenPage extends Component {
                     eval_usuario['resultado']=res_correctas
                     eval_usuario['intentos']=(data[0].intentos+1)
                     const userToken = JSON.parse(localStorage.getItem('userToken'));
-                    let url =`https://infinite-peak-15466.herokuapp.com/apis/evaluacion/${data[0].id}/`;
+                    let url =`https://fierce-tundra-88302.herokuapp.com/apis/evaluacion/${data[0].id}/`;
                     var request = new Request(url, {
                         method: 'PUT',
                         body: JSON.stringify(eval_usuario),
@@ -259,7 +259,7 @@ class ExamenPage extends Component {
                     eval_usuario['resultado']=res_correctas
                     eval_usuario['intentos']=(data[0].intentos+1)
                     const userToken = JSON.parse(localStorage.getItem('userToken'));
-                    let url = `https://infinite-peak-15466.herokuapp.com/apis/evaluacion/${data[0].id}/`;
+                    let url = `https://fierce-tundra-88302.herokuapp.com/apis/evaluacion/${data[0].id}/`;
                     var request = new Request(url, {
                         method: 'PUT',
                         body: JSON.stringify(eval_usuario),
