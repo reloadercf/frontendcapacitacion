@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Layout, Menu, Icon} from 'antd';
 import {Link} from 'react-router-dom';
-import {isAllowed} from '../content/ProfilePage/Auth';
+//import {isAllowed} from '../content/ProfilePage/Auth';
 //import { hasRole, isAllowed } from './ProfilePage/Auth';
 const {Sider} = Layout;
 

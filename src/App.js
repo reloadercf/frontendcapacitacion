@@ -7,9 +7,8 @@ import { HeaderSection } from './components/header/HeaderSection';
 
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
-import Alert from 'react-s-alert';
-import Main from './components/content/Main';
 import Routes from './Routes';
+import swal from 'sweetalert';
 
 
 
@@ -82,10 +81,9 @@ finish_class=(clase)=>
             })
          
         })
-    
-     
-  
 }
+
+
 
 do_evaluacion=(clase)=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
@@ -203,19 +201,24 @@ fetch(request)
     .then(data=>{
         localStorage.setItem('userToken', JSON.stringify(data.token));
         this.getmodulos()
+        swal({
+            title: "Exito",
+            text: "Bienvenido",
+            icon: "success",
+            button: "ok",
+          });
         this.setState({logged:true})
     })
     .catch(e=>{
         
-        Alert.error('Error:', {
-            effect: 'slide',
-            timeout: 2000,
-            position: 'top',
-            customFields: {
-                customerName: "Ingresa tus datos correctamente.",
-            }
-        });
+        swal({
+            title: "Error",
+            text: "Usuario o contraseña incorrectos",
+            icon: "error",
+            button: "ok",
+          });
         this.setState({logged:false})
+      
 })
 }
 
@@ -235,11 +238,11 @@ logOut=()=>{
            video_end,
            permissions
         }=this.state
-
-
+    
     return (
-      <Layout>
+    <Layout>
         <NavMenu logged={logged} logOut={this.logOut} permissions={permissions}/>
+
         
       <Layout className="layout-videos">
         <Header style={{ background: '#fff', height:"100px", padding: 0 }} >
@@ -261,7 +264,7 @@ logOut=()=>{
                 getmodulos={this.getmodulos}
 
             />
-             <Alert stack={{limit: 3}} contentTemplate={Main} />
+          
 
         </Content>
         <Footer  style={{ padding: 0, marginTop:"20vh"}} >

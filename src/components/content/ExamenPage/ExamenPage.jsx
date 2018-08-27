@@ -2,12 +2,8 @@ import React, { Component } from 'react';
 import {Row, Col} from 'antd';
 import { HeaderExamen } from './HeaderExamen';
 import { ExamenComponent } from './ExamenComponent';
-
- 
-import 'react-s-alert/dist/s-alert-default.css';
-import 'react-s-alert/dist/s-alert-default.css';
-import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import Alert from 'react-s-alert';
+import swal from 'sweetalert';
 
 class ExamenPage extends Component {
 
@@ -17,7 +13,8 @@ class ExamenPage extends Component {
         respuestas:[],
         res_correctas:0,
         evaluacion:{},
-        intentos:0      
+        intentos:0 ,
+        paso_exa:false,    
       }
     
       componentWillMount()
@@ -57,8 +54,8 @@ class ExamenPage extends Component {
                 this.setState({evaluacion})
                 this.setState({examen:examen_clase})
                 this.setState({preguntas:examen_clase.pregunta_examen})
-                  console.log(subtema_tema[0].nombre_examen)
-                  console.log(examen_clase.pregunta_examen)
+                  //console.log(subtema_tema[0].nombre_examen)
+                console.log(examen_clase.pregunta_examen)
                
                   
             })
@@ -68,33 +65,37 @@ class ExamenPage extends Component {
 
         }
 
+
       onChange=(e)=>{
-            let {respuestas, preguntas} = this.state;
-            let field = e.target.name;
+            let {respuestas, preguntas, respuestas_calificar} = this.state;
+            //let field = e.target.name;
 
             if (e.target.value==null){
                 console.log("debes contestar")
             }
-
-            let pregunta_revisar = preguntas.filter(i=>{
+            let pregunta_revisar = preguntas.find(i=>{
                 return i.pregunta == e.target.name
               })
-              
-            let calificar_resp=pregunta_revisar[0].respuesta_pregunta.filter(i=>{
+  
+            let calificar_resp=pregunta_revisar.respuesta_pregunta.find(i=>{
                 return i.respuestas == e.target.value;
-              })
+            })
 
-             respuestas[calificar_resp[0].pregunta]=calificar_resp[0].res_correcta
-
+             respuestas[calificar_resp.pregunta]= calificar_resp.res_correcta
              let result = respuestas.filter(respuesta => respuesta==true);
-
-              this.setState({res_correctas: result.length})            
+             
+             
+             this.setState({res_correctas: result.length})
+             console.log( pregunta_revisar)
+             console.log( respuestas[calificar_resp.pregunta])
+              
         }
 
 
 
        SendExamen=(e)=>{
-           let{res_correctas, preguntas, evaluacion, intentos}=this.state
+           let{res_correctas, preguntas, evaluacion, intentos,}=this.state
+
             //let usuario=this.props.user
             evaluacion['usuario']=this.props.user.id
             evaluacion['resultado']=res_correctas
@@ -144,16 +145,12 @@ class ExamenPage extends Component {
                 this.props.paso_examen(false)
                 evaluacion['aprobado']=false
                 evaluacion['intentos']=intentos+1;
-            
-                Alert.error('Reprobaste:', {
-                    effect: 'slide',
-                    timeout: 5000,
-                    position: 'top',         
-                    customFields: {
-                        customerName: "Reprobaste el modulo te invito a repetir nuevamente la clase, exito",
-                    }                   
-                });
-
+                swal({
+                    title: "Reprobado",
+                    text: "Has reprobado la evaluacion, revisa tus resultados",
+                    icon: "success",
+                    button: "ok",
+                  });
                
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
                 let url = `http://127.0.0.1:8000/apis/evaluacion/${evaluacion.clase}/`
@@ -179,8 +176,13 @@ class ExamenPage extends Component {
             }
        }
 
+  
        SendExamenDos=(e)=>{
-        let{res_correctas, preguntas, evaluacion, intentos}=this.state
+        let{res_correctas, preguntas, evaluacion, respuestas}=this.state
+        let resp= respuestas.filter(respuesta => respuesta!==null)
+
+        this.setState({respuestas:resp})
+
         const userToken = JSON.parse(localStorage.getItem('userToken'));
         let url = `http://127.0.0.1:8000/my_evaluations/?e=${evaluacion.clase}`;
         var request = new Request(url, {
@@ -193,23 +195,18 @@ class ExamenPage extends Component {
         fetch(request)
             .then(r => r.json())
             .then(data => {    
-                 
-                if(res_correctas>=(preguntas.length-1))
+                if(res_correctas>=(preguntas.length))
                 {
-                    Alert.success('Felicidades:', {
-                        effect: 'slide',
-                        timeout: 5000,
-                        position: 'top',
-                     
-                        customFields: {
-                            customerName: "Felicidaddes aprobaste el examen puedes pasar al siguiente modulo ",
-                            resultados: res_correctas
-                        }
-                        
-                    });
+                    swal({
+                        title: "Felicidades",
+                        text: "Has aprobado tu examen",
+                        icon: "success",
+                        button: "Salir",
+                      });
+
                     this.props.paso_examen(true)
+                    this.setState({paso_exa:true})
     
-                    
                     let eval_usuario={}
                     eval_usuario['clase']=evaluacion.clase
                     eval_usuario['usuario']=this.props.user.id
@@ -230,8 +227,7 @@ class ExamenPage extends Component {
                     .then(r=>r.json())
                     .then(data=>{
                         console.log(data) 
-                        console.log("Aprobaste") 
-                        this.props.history.push('/profile')   
+                        //this.props.history.push('/profile')   
                     })
                     .catch(e=>{
                         console.log(e)
@@ -241,17 +237,12 @@ class ExamenPage extends Component {
               }      
               else
                 {
-                    Alert.error('Reprobaste:', {
-                        effect: 'slide',
-                        timeout: 5000,
-                        position: 'top',         
-                        customFields: {
-                            customerName: "Reprobaste el modulo te invito a repetir nuevamente la clase, exito",
-                        }                   
-                    });
-
-
-    
+                    swal({
+                        title: "Reprobaste",
+                        text: "Reprobaste tu examen revisa tus respuestas e intantolo nuevamente",
+                        icon: "error",
+                        button: "Salir",
+                      }); 
                     let eval_usuario={}
                     eval_usuario['clase']=evaluacion.clase
                     eval_usuario['usuario']=this.props.user.id
@@ -271,12 +262,11 @@ class ExamenPage extends Component {
                     fetch(request)
                     .then(r=>r.json())
                     .then(data=>{
-                        console.log(data) 
-                        console.log("Reprobaste") 
-                        this.props.history.push(`/modulo${this.props.match.params.modulo_id}/tema${this.props.match.params.tema_id}/video${this.props.match.params.examen_id}`)      
+                        //console.log(data) 
+                        this.props.history.push(`/modulo${this.props.match.params.modulo_id}/tema${this.props.match.params.tema_id}/examen${this.props.match.params.examen_id}`)      
                     })
                     .catch(e=>{
-                        console.log(e)
+                        //console.log(e)
                     })  
     
                 }
@@ -289,7 +279,7 @@ class ExamenPage extends Component {
 
 
     render() {
-        let{examen,  preguntas, respuesta}=this.state
+        let{examen,  preguntas, respuestas, paso_exa}=this.state
         return (
             <div>
                 <Row type="flex" justify="start">
@@ -299,7 +289,7 @@ class ExamenPage extends Component {
                 </Row>
                 <Row type="flex" justify="center">
                     <Col lg={21} md={20} xs={24}>
-                        <ExamenComponent onChange={this.onChange} SendExamen={this.SendExamenDos} respuesta={respuesta} examen={examen} preguntas={preguntas}/>            
+                        <ExamenComponent onChange={this.onChange} SendExamen={this.SendExamenDos} respuestas={respuestas} examen={examen} paso_exa={paso_exa} preguntas={preguntas} />            
                     </Col>
                    
 

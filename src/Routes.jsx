@@ -7,7 +7,7 @@ import LogUserPage from './components/navbar/LogUserPage';
 import HomePage from './components/content/HomePage/HomePage';
 import ExamenPage from './components/content/ExamenPage/ExamenPage';
 import EvaluacionPage from './components/content/evaluaciones/EvaluacionPage';
-import { hasRole, isAllowed } from './components/content/ProfilePage/Auth';
+//import { hasRole, isAllowed } from './components/content/ProfilePage/Auth';
 
 class Routes extends React.Component{ 
     render(){
@@ -38,7 +38,8 @@ class Routes extends React.Component{
                     />:<Redirect to="/"/>)}/> 
 
                 <Route exact path="/modulo:modulo_id/tema:tema_id/examen:examen_id" render={props=>(logged?<ExamenPage {...props} modulos={modulos} paso_examen={paso_examen} user={user}/>:<Redirect to="/"/>)}/>    
-                <Route path="/evaluaciones" render={()=>(logged?<EvaluacionPage  />:<Redirect to="/"/>)}/>                              
+                <Route path="/evaluaciones" render={()=>(logged?<EvaluacionPage  />:<Redirect to="/"/>)}/>  
+                <Route component={HomePage}/>                                
             </Switch>
         )
     }

@@ -19,7 +19,7 @@ export class VideoPage extends Component {
     }
 
     getModulo = () => {
-        let modulos = this.props.modulos
+        //let modulos = this.props.modulos
 
         let url = "http://127.0.0.1:8000/apis/modulo/";
         var request = new Request(url, {
