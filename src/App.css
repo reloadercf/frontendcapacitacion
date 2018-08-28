@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+@import './components/content/ProfilePage/profile.css';
 @import './components/content/ModuloPage/ModuloPage.css';
 @import './components/content/ExamenPage/ExamenPage.css';
 @import './components/content/VideoPage/VideoPage.css';

@@ -19,7 +19,7 @@ export class VideoPage extends Component {
     }
 
     getModulo = () => {
-        let modulos = this.props.modulos
+        //let modulos = this.props.modulos
 
         let url = "https://fierce-tundra-88302.herokuapp.com/apis/modulo/";
         var request = new Request(url, {

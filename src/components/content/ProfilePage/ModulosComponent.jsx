@@ -18,11 +18,11 @@ export const ModulosComponent = ({id, descripcion, objetivo, autor}) => {
     return (
         <Popover  placement="right"  content={content} title={`MODULO: ${id}`}>
         <Card
-            style={{textAlign:"center"}}
+            className="card-modulo"
           >
             <div>
-                <div>
-                    <img alt = "example" src = {dipra} style={{width:"100%"}}/> 
+                <div className="div_img_modulo">
+                    <img alt={`MODULO:${id}`} src = {dipra} style={{width:"100%"}}/> 
                 </div>
                 <h3>{`MODULO: ${id}`}</h3>
                 <p>{autor}</p>
