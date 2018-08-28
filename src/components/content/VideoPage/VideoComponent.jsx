@@ -4,6 +4,9 @@ import {Button} from 'antd';
 import {Slider} from 'antd';
 import swal from 'sweetalert';
 import {Link} from 'react-router-dom'
+import SliderDos from 'rc-slider/lib/Slider';
+import 'rc-slider/assets/index.css';
+
 
 export class VideoComponent extends Component {
     state={
@@ -19,6 +22,7 @@ export class VideoComponent extends Component {
         playbackRate: 1.0,
         seek:false,
         finalizo_clase:false,
+        value: { min: 2, max: 10 },
        
     }
 
@@ -89,10 +93,8 @@ export class VideoComponent extends Component {
     onEndedVideo=()=>{
         let{match, history}=this.props
         let link = `/modulo${match.params.modulo_id}/tema${match.params.tema_id}/examen${match.params.video_id}`
-
          if (this.state.finalizo_clase)
          {
-           
                 return null
          }
          else{
@@ -112,7 +114,6 @@ export class VideoComponent extends Component {
                 switch (value) {
                   case "video":
                     this.RedirectModulo()
-                    this.setState({loop:true})
                     break;
                
                   case "examen":
@@ -179,14 +180,29 @@ export class VideoComponent extends Component {
                     <div style={{width:"40%"}}>
                     <span>Adelantar</span>
                     <input
-                        type='range' min={0} max={1} step='any'
+                        type='range' 
+                        min={0} 
+                        max={1} 
+                        step='any'
                         value={played}
                         style={{width:"100%"}}
                         onMouseDown={this.onSeekMouseDown}
                         onChange={this.onSeekChange}
                         onMouseUp={this.onSeekMouseUp}
                     />
+                    {/* <SliderDos
+                        min={0} 
+                        max={1}
+                        value={played}
+                        step='any'
+                        onBeforeChange={this.onSeekMouseDown}
+                        onChange={this.onSeekChange}
+                        onAfterChange={this.onSeekMouseUp}
+                    
+                    /> */}
+                 
                     </div>
+                     
                     :  
                      null
                   
@@ -206,7 +222,7 @@ export class VideoComponent extends Component {
                 </div>
                 <div>
                     {this.state.finalizo_clase? 
-                        
+
                     <Link to={ `/modulo${match.params.modulo_id}/tema${match.params.tema_id}/examen${match.params.video_id}`}>
                         <Button type="primary" icon="search"> Examen</Button>
                     </Link>

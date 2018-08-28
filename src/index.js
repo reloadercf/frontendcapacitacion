@@ -8,6 +8,7 @@ import 'moment/locale/fr';
 import {BrowserRouter} from 'react-router-dom';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import 'react-input-range/lib/css/index.css'
 
 
 const WithRouter = () => (

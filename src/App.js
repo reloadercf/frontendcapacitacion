@@ -11,8 +11,6 @@ import Routes from './Routes';
 import swal from 'sweetalert';
 
 
-
-
 const { Header, Content, Footer } = Layout;
 
 class App extends Component {
@@ -77,7 +75,7 @@ finish_class=(clase)=>
             fetch(request)
             .then(r=>r.json())
             .then(datados=>{    
-                console.log(datados)          
+                //console.log(datados)          
             })
          
         })
@@ -117,8 +115,7 @@ do_evaluacion=(clase)=>{
                 fetch(request)
                 .then(r=>r.json())
                 .then(data=>{
-                    console.log(data) 
-                    console.log("Se creo la evaluacion") 
+                   
                 })
                 .catch(e=>{
                     console.log(e)
@@ -163,6 +160,7 @@ getmodulos=()=>{
             console.log(this.state.permissions)
         })
         .catch(e => {
+
         })
 }
 
