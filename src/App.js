@@ -63,11 +63,7 @@ finish_class=(clase)=>
             this.setState({video_end:true})
             console.log(user_clase)
             const userToken = JSON.parse(localStorage.getItem('userToken'));
-<<<<<<< HEAD
             let url = `https://fierce-tundra-88302.herokuapp.com/apis/clasesuser/${user_clase.id}/`
-=======
-            let url = `http://127.0.0.1:8000/apis/clasesuser/${user_clase.id}/`
->>>>>>> video-capacitacion
             var request = new Request(url, {
                 method: 'PUT',
                 body: JSON.stringify(user_clase),
