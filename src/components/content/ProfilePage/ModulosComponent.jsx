@@ -4,7 +4,7 @@ import dipra from '../../../dipra.png';
 import {Link} from 'react-router-dom';
 
 
-export const ModulosComponent = ({id, descripcion, objetivo, autor}) => {
+export const ModulosComponent = ({id, descripcion, objetivo, autor, portada}) => {
 
     const content = (
         <div style={{width:"200px"}}>
@@ -22,7 +22,7 @@ export const ModulosComponent = ({id, descripcion, objetivo, autor}) => {
           >
             <div>
                 <div className="div_img_modulo">
-                    <img alt={`MODULO:${id}`} src = {dipra} style={{width:"100%"}}/> 
+                    <img alt={`MODULO:${id}`} src = {portada} style={{width:"100%"}}/> 
                 </div>
                 <h3>{`MODULO: ${id}`}</h3>
                 <p>{autor}</p>
