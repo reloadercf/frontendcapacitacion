@@ -46,7 +46,7 @@ export class VideoComponent extends Component {
     get_status_clase=()=>{
         let clase=this.props.match.params.video_id
         const userToken=JSON.parse(localStorage.getItem('userToken'));
-        let url = `http://127.0.0.1:8000/my_clases?s=${clase}`;
+        let url = `https://serene-fortress-47490.herokuapp.com/my_clases?s=${clase}`;
         var request =new Request(url,{
             method: 'GET',
             headers:new Headers({
