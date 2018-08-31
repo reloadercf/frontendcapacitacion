@@ -7,7 +7,7 @@
 @import './components/footer/Footer.css';
 @import './components/content/HomePage/HomePage.css';
 @import './components/content/evaluaciones/evaluaciones.css';
-
+@import './components/content/Extra/Extra.css';
 
  .login-form {
   max-width: 300px;

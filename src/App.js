@@ -240,8 +240,6 @@ logOut=()=>{
     return (
     <Layout>
         <NavMenu logged={logged} logOut={this.logOut} permissions={permissions}/>
-
-        
       <Layout className="layout-videos">
         <Header style={{ background: '#fff', height:"100px", padding: 0 }} >
             <HeaderSection/>
