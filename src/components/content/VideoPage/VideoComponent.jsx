@@ -152,7 +152,7 @@ export class VideoComponent extends Component {
                 ref={this.ref}
                 url={subtema.video}
                 playing={playing}
-                controls={true}
+                controls={false}
                 volume={volume}
                 width={"100%"}
                 height={"100%"}

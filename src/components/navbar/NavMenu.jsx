@@ -4,17 +4,18 @@ import {Link} from 'react-router-dom';
 //import {isAllowed} from '../content/ProfilePage/Auth';
 //import { hasRole, isAllowed } from './ProfilePage/Auth';
 const {Sider} = Layout;
+const SubMenu = Menu.SubMenu;
 
-const Logged = ({logOut, permissions}) => (
+const Logged = ({logOut, permissions, categories}) => (
   <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
 
-    <Menu.Item key="6" onClick={logOut}>
+    <Menu.Item key="a" onClick={logOut}>
       <Icon type="appstore-o" style={{
         fontSize: "20px"
       }}/>
       <span className="nav-text">Cerrar Sesion</span>
     </Menu.Item>
-    <Menu.Item key="7">
+    <Menu.Item key="b">
       <Link to="/profile">
         <Icon type="team" style={{
           fontSize: "20px"
@@ -22,7 +23,7 @@ const Logged = ({logOut, permissions}) => (
         <span className="nav-text">Modulos</span>
       </Link>
     </Menu.Item>
-    <Menu.Item key="8">
+    <Menu.Item key="c">
       <Link to="/evaluaciones">
         <Icon type="profile" style={{
           fontSize: "20px"
@@ -30,6 +31,16 @@ const Logged = ({logOut, permissions}) => (
         <span className="nav-text">Evaluaciones</span>
       </Link>
     </Menu.Item>
+    <Menu.Item key="d">
+      <Link to="/extra">
+        <Icon type="step-forward" style={{
+          fontSize: "20px"
+        }}/>
+        <span className="nav-text">Extra</span>
+      </Link>
+    </Menu.Item>
+
+
 
     {/* {isAllowed(permissions,['add_tema']) && 
     <Menu.Item key="9">
@@ -57,6 +68,40 @@ const Login = ({props}) => (
 );
 
 class NavMenu extends Component {
+
+  state = {
+    collapsed: true,
+    categories:[]
+  }
+
+  toggleCollapsed = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  }
+
+  componentWillMount(){
+      this.getcategories()
+  }
+
+  getcategories=()=>{
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
+    let url = "http://127.0.0.1:8000/apis/categoria/";
+    var request = new Request(url, {
+        method: 'GET',
+        headers:new Headers({
+            'Authorization':'Token '+userToken,
+            'Content-Type': 'application/json'
+        }) 
+    });
+    fetch(request)
+        .then(r => r.json())
+        .then(data => {  
+              this.setState({categories:data})
+        })
+  
+  }
+
   render() {
 
     let {logged} = this.props
@@ -64,8 +109,9 @@ class NavMenu extends Component {
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
-        onBreakpoint={(broken) => {}}
-        onCollapse={(collapsed, type) => {}}
+        collapsed={this.state.collapsed}
+        onCollapse={this.toggleCollapsed}
+        //collapsible={true}
         style={{
         height: '100vh',
         position: 'fixed',
@@ -73,7 +119,7 @@ class NavMenu extends Component {
       }}>
 
         <div className="logo"/> {logged
-          ? <Logged logOut={this.props.logOut}/>
+          ? <Logged logOut={this.props.logOut} categories={this.state.categories}/>
           : <Login/>}
       </Sider>
     );

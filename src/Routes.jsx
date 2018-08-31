@@ -7,6 +7,7 @@ import LogUserPage from './components/navbar/LogUserPage';
 import HomePage from './components/content/HomePage/HomePage';
 import ExamenPage from './components/content/ExamenPage/ExamenPage';
 import EvaluacionPage from './components/content/evaluaciones/EvaluacionPage';
+import ExtraPage from './components/content/Extra/ExtraPage';
 //import { hasRole, isAllowed } from './components/content/ProfilePage/Auth';
 
 class Routes extends React.Component{ 
@@ -29,6 +30,7 @@ class Routes extends React.Component{
                 <Route exact path="/" render={()=>(logged?(<Redirect to="/profile"/>):(<HomePage/>))}  />  
                 <Route path="/login" render={props =>(logged?<Redirect to="/profile" />:<LogUserPage {...props} logIn={logIn}/>)}/>    
                 <Route path="/profile" render={()=>(logged?<ProfilePage getmodulos={getmodulos}  modulos={modulos} />:<Redirect to="/"/>)}/> 
+                <Route path="/extra" render={props=>(logged?<ExtraPage {...props}/>:<Redirect to="/"/>)}/> 
                 <Route exact path="/modulo:modulo_id" render={props=>(logged?<DetailPage {...props}  modulos={modulos} user={user} examen_avalible={examen_avalible} do_evaluacion={do_evaluacion}/>:<Redirect to="/"/>)}/>  
                 <Route exact path="/modulo:modulo_id/tema:tema_id/video:video_id"   render={props=>(logged?<VideoPage 
                     {...props} 

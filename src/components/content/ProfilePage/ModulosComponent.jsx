@@ -15,6 +15,7 @@ export const ModulosComponent = ({id, descripcion, objetivo, autor}) => {
          </Link>
         </div>
       );
+      
     return (
         <Popover  placement="right"  content={content} title={`MODULO: ${id}`}>
         <Card
