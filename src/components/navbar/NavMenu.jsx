@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 const {Sider} = Layout;
 const SubMenu = Menu.SubMenu;
 
-const Logged = ({logOut, permissions, categories}) => (
+const Logged = ({logOut, permissions}) => (
   <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
 
     <Menu.Item key="a" onClick={logOut}>
@@ -71,7 +71,7 @@ class NavMenu extends Component {
 
   state = {
     collapsed: true,
-    categories:[]
+   
   }
 
   toggleCollapsed = () => {
@@ -80,27 +80,6 @@ class NavMenu extends Component {
     });
   }
 
-  componentWillMount(){
-      this.getcategories()
-  }
-
-  getcategories=()=>{
-    const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "http://127.0.0.1:8000/apis/categoria/";
-    var request = new Request(url, {
-        method: 'GET',
-        headers:new Headers({
-            'Authorization':'Token '+userToken,
-            'Content-Type': 'application/json'
-        }) 
-    });
-    fetch(request)
-        .then(r => r.json())
-        .then(data => {  
-              this.setState({categories:data})
-        })
-  
-  }
 
   render() {
 
@@ -119,7 +98,7 @@ class NavMenu extends Component {
       }}>
 
         <div className="logo"/> {logged
-          ? <Logged logOut={this.props.logOut} categories={this.state.categories}/>
+          ? <Logged logOut={this.props.logOut} />
           : <Login/>}
       </Sider>
     );
