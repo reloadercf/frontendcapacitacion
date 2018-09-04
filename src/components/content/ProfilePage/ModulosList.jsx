@@ -22,7 +22,12 @@ class ModulosList extends Component {
                   {{display:"flex", 
                   alignItems:"center",
                   fontSize:"30px"
-                  }}>No tienes modulos asignados</div> }                    
+                  }
+
+                  }>
+
+                    ¡¡Muy pronto tendras modulos asignados ponte en contacto con tu Administrador!!
+                  </div>}                    
                 </Row>
 
             </div>
