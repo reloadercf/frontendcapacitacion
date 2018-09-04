@@ -10,11 +10,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import 'react-input-range/lib/css/index.css'
 
-
 const WithRouter = () => (
     <BrowserRouter>
            <App/>
     </BrowserRouter>
+    
 );
 
 ReactDOM.render(<WithRouter />, document.getElementById('root'));

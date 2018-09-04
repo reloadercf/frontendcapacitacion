@@ -9,6 +9,7 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import Routes from './Routes';
 import swal from 'sweetalert';
+import {Helmet} from "react-helmet";
 
 
 const { Header, Content, Footer } = Layout;
@@ -238,10 +239,15 @@ logOut=()=>{
         }=this.state
     
     return (
+
     <Layout>
+    <Helmet>
+         <meta charSet="utf-8" />
+                <title>DIPRA Formaci&oacute;n</title>
+            </Helmet>
         <NavMenu logged={logged} logOut={this.logOut} permissions={permissions}/>
       <Layout className="layout-videos">
-        <Header style={{ background: '#fff', height:"100px", padding: 0 }} >
+        <Header style={{ background: '#f0f2f5', height:"100px", padding: 0 }} >
             <HeaderSection/>
         </Header>
         <Content style={{ margin: '24px 16px 0',  }}>
@@ -268,7 +274,7 @@ logOut=()=>{
         </Footer>
       </Layout>
     </Layout>
-
+    
     
     );
   }

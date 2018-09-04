@@ -2,18 +2,21 @@
     height: auto;
 }
 .home_objetivos{
-    background: #c9d6df;
+    background: #093056;
+    color: #ffffff;
     opacity: 0.8;
     padding: 1em;
 }
 .home_info{
-    background: #f0f5f9;
+    background: #03213E;
+    color: #ffffff;
     opacity: 0.8;
     padding: 1em;
 }
 
 .home_estrategia{
-    background: #c9d6df;
+    background: #011528;
+    color: #ffffff;
     opacity: 0.8;
     padding: 1em;
 }
@@ -60,7 +63,7 @@ div .container img{
 position: absolute;
 bottom: 7em;
 font-size: 30px;
-color: #f7f7f7;
+color: #ffffff;
 background: rgb(26, 25, 25);
 padding: 0.5em;
 width: 73%; 
@@ -124,5 +127,14 @@ transition: 0.8s;
 @media only screen and (max-width: 340px) and (min-width: 5px)  {  
   
 
-
+/* Secciones */ 
 } 
+.home_objetivos h2{
+  color: #ffffff;
+}
+.home_info h2{
+  color: #ffffff;
+}
+.home_estrategia h2 {
+  color: #ffffff
+}

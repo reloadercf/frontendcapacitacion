@@ -10,7 +10,7 @@ class SliderComponent extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            autoplaySpeed: 4000,
+            autoplaySpeed: 2500,
             cssEase: "linear",
           
         };
@@ -20,22 +20,22 @@ class SliderComponent extends Component {
             }}>
                 <Slider {...settings}>
                     <div className="container">
-                        <img src="https://images.pexels.com/photos/7096/people-woman-coffee-meeting.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="imagen 1"/>
+                        <img src="https://www.openmet.com/wp-content/uploads/2014/12/empresas-exito.jpg" alt="imagen 1"/>
                         <div className="div-gradient">
-                            <h1 >Amplia tus conocimientos</h1>
+                            <h1 >Genera presencia con nuevos clientes</h1>
                         </div>
                     </div>
                     <div className="container">
-                        <img src="https://images.pexels.com/photos/946250/pexels-photo-946250.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="imagen 2"/>
+                        <img src="https://elevenews.com/wp-content/uploads/2018/04/Risk-management-jobs-1024x576-1024x576.jpg" alt="imagen 2"/>
                         <div className="div-gradient">
-                            <h1 >Mejora tus habilidades de prospección</h1>
+                            <h1 >Mejora tus resultados </h1>
                         </div>
                     </div>
 
                     <div className="container">
-                        <img src="https://images.pexels.com/photos/955447/pexels-photo-955447.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="imagen 3"/>
+                        <img src="https://www.portada-online.com/wp-content/uploads/2015/07/Social_Marketing.jpg" alt="imagen 3"/>
                         <div className="div-gradient">
-                            <h1>Aprende a manejar las herramientas para potencializar tus ventas</h1>
+                            <h1>Entiende tu Negocio</h1>
                         </div>
                     </div>
 
