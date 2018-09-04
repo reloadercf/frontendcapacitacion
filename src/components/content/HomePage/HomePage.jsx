@@ -25,7 +25,7 @@ class HomePage extends Component {
                                         fontSize: "30px",
                                         color: '#ffffff',
                                         marginRight: "5px"
-                                    }}/>Work team
+                                    }}/>Profesionales
                                 </h2>
                             </div>
 
@@ -47,7 +47,7 @@ class HomePage extends Component {
                                         fontSize: "30px",
                                         color: '#ffffff',
                                         marginRight: "5px"
-                                    }}/>Training
+                                    }}/>Alta disponibilidad
                                 </h2>
                             </div>
                             <p>Aprende donde y cuando quieras:En todo momento esta disponible el acceso a la plataforma donde podras aprender y adquirir conocimiento de forma continua. Con las apps gratuitas que DIPRA desarrollo para ti disponibles para iOS, Android, </p>
@@ -68,7 +68,7 @@ class HomePage extends Component {
                                         fontSize: "30px",
                                         color: '#ffffff',
                                         marginRight: "5px"
-                                    }}/>Effect
+                                    }}/>Alto Rendimiento
                                 </h2>
                             </div>
                             <p>Mantenerse al día con la tecnología tomando cursos, evaluaciones y herramientas dirigidas por expertos que te ayudarán a desarrollar las habilidades que necesitas, cuando las necesitas. </p>
