@@ -17,7 +17,7 @@ class ProfilePage extends Component {
 
     get_myprofile=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "https://serene-fortress-47490.herokuapp.com/my_user/";
+    let url = "https://still-chamber-95677.herokuapp.com/my_user/";
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({

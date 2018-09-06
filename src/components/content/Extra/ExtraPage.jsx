@@ -17,7 +17,7 @@ class ExtraPage extends Component {
 
     getProducts=()=>{
         //const userToken = JSON.parse(localStorage.getItem('userRanchoToken'));
-        let url = 'https://serene-fortress-47490.herokuapp.com/apis/curso_extra/';
+        let url = 'https://still-chamber-95677.herokuapp.com/apis/curso_extra/';
         var request = new Request(url, {
             method: 'GET',
             //body: data,
@@ -39,7 +39,7 @@ class ExtraPage extends Component {
 
     getCategories=()=>{
         //const userToken = JSON.parse(localStorage.getItem('userRanchoToken'));
-        let url = 'https://serene-fortress-47490.herokuapp.com/apis/categoria/';
+        let url = 'https://still-chamber-95677.herokuapp.com/apis/categoria/';
         var request = new Request(url, {
             method: 'GET',
             //body: data,

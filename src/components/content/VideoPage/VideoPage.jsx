@@ -21,7 +21,7 @@ export class VideoPage extends Component {
     getModulo = () => {
         //let modulos = this.props.modulos
 
-        let url = "https://serene-fortress-47490.herokuapp.com/apis/modulo/";
+        let url = "https://still-chamber-95677.herokuapp.com/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',
             headers: new Headers({'Content-Type': 'application/json'})

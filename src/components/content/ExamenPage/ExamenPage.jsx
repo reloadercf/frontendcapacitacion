@@ -27,7 +27,7 @@ class ExamenPage extends Component {
       getModulo = () => {
         let{evaluacion}=this.state
         //let modulos=this.props.modulos
-        let url = "https://serene-fortress-47490.herokuapp.com/apis/modulo/";
+        let url = "https://still-chamber-95677.herokuapp.com/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',
             headers: new Headers({'Content-Type': 'application/json'})
@@ -98,7 +98,7 @@ class ExamenPage extends Component {
 
         console.log(resp)
         const userToken = JSON.parse(localStorage.getItem('userToken'));
-        let url = `https://serene-fortress-47490.herokuapp.com/my_evaluations/?e=${evaluacion.clase}`;
+        let url = `https://still-chamber-95677.herokuapp.com/my_evaluations/?e=${evaluacion.clase}`;
         var request = new Request(url, {
             method: 'GET',
             headers:new Headers({
@@ -128,7 +128,7 @@ class ExamenPage extends Component {
                     eval_usuario['resultado']=res_correctas
                     eval_usuario['intentos']=(data[0].intentos+1)
                     const userToken = JSON.parse(localStorage.getItem('userToken'));
-                    let url =`https://serene-fortress-47490.herokuapp.com/apis/evaluacion/${data[0].id}/`;
+                    let url =`https://still-chamber-95677.herokuapp.com/apis/evaluacion/${data[0].id}/`;
                     var request = new Request(url, {
                         method: 'PUT',
                         body: JSON.stringify(eval_usuario),
@@ -167,7 +167,7 @@ class ExamenPage extends Component {
                     eval_usuario['resultado']=res_correctas
                     eval_usuario['intentos']=(data[0].intentos+1)
                     const userToken = JSON.parse(localStorage.getItem('userToken'));
-                    let url = `https://serene-fortress-47490.herokuapp.com/apis/evaluacion/${data[0].id}/`;
+                    let url = `https://still-chamber-95677.herokuapp.com/apis/evaluacion/${data[0].id}/`;
                     var request = new Request(url, {
                         method: 'PUT',
                         body: JSON.stringify(eval_usuario),

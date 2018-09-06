@@ -18,7 +18,7 @@ export class ContenidoCard extends Component
 
     get_status_clase=()=>{
         const userToken = JSON.parse(localStorage.getItem('userToken'));
-        let url = `https://serene-fortress-47490.herokuapp.com/my_clases?s=${this.props.id}`;
+        let url = `https://still-chamber-95677.herokuapp.com/my_clases?s=${this.props.id}`;
         var request = new Request(url, {
             method: 'GET',
             headers:new Headers({
