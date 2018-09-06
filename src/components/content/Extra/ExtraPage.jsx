@@ -83,7 +83,7 @@ class ExtraPage extends Component {
             })
         }
         return (
-            <div style={{height:"40vh"}}>
+            <div style={{height:"auto"}}>
             <Filters 
                 categories={categories}
                 search={search}
