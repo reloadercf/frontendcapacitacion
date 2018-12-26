@@ -137,9 +137,7 @@ export class VideoComponent extends Component {
     render() {
         let {subtema,match}=this.props
         let {playing, volume, played } = this.state
-
-       
-        
+ 
         return (
             <div
             style={{
@@ -150,12 +148,12 @@ export class VideoComponent extends Component {
         
             <ReactPlayer               
                 ref={this.ref}
-                url={subtema.video}
+                url="http://www.dipradigital.com/videos_capa/01_Modulo_01_Dic_2016.mp4"
                 playing={playing}
                 controls={false}
                 volume={volume}
                 width={"100%"}
-                height={"100%"}
+                
                 onEnded={this.onEndedVideo}
                 onProgress={this.onProgress}
                 loop={false}

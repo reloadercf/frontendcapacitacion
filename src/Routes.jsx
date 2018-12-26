@@ -25,6 +25,8 @@ class Routes extends React.Component{
                 getmodulos
                 
                 } = this.props;
+
+                console.log(modulos)
         return(
             <Switch>
                 <Route exact path="/" render={()=>(logged?(<Redirect to="/profile"/>):(<HomePage/>))}  />  

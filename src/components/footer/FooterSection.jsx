@@ -22,12 +22,12 @@ export const FooterSection=()=>{
                        <div className="follow">
                            <h2><Popover title="Compartimos contenido en Redes Sociales"><Icon type="like" theme="outlined" /> Siguenos</Popover></h2>
                            <div className="icons">
-                           <Popover title="Dale Like"><a href="https://www.facebook.com/DIPRASC" target="_blank"><Icon type="facebook" style={{fontSize: "30px", marginRight: ".5em",color:"#fff"}}/></a></Popover>
-                           <Popover title="Follow"><a href="https://twitter.com/DIPRASC?lang=es" target="_blank"><Icon type="twitter" style={{fontSize: "30px",marginRight: ".5em",color:"#fff"}}/></a></Popover>
-                           <Popover title="Siguenos"><a href="https://www.instagram.com/diprasc/" target="_blank"><Icon type="instagram"style={{fontSize: "30px", marginRight: ".5em",color:"#fff"}} /></a></Popover>
+                           <Popover title="Dale Like"><a href="https://www.facebook.com/DIPRASC" target="blank"><Icon type="facebook" style={{fontSize: "30px", marginRight: ".5em",color:"#fff"}}/></a></Popover>
+                           <Popover title="Follow"><a href="https://twitter.com/DIPRASC?lang=es" target="blank"><Icon type="twitter" style={{fontSize: "30px",marginRight: ".5em",color:"#fff"}}/></a></Popover>
+                           <Popover title="Siguenos"><a href="https://www.instagram.com/diprasc/" target="blank"><Icon type="instagram"style={{fontSize: "30px", marginRight: ".5em",color:"#fff"}} /></a></Popover>
                            </div>
                            <div> 
-                               <span><Popover title="Visita sito Oficial"><a href="http://www.dipra.com.mx" target="_blank"><Icon type="global" theme="outlined" /> www.dipra.com.mx</a></Popover></span>
+                               <span><Popover title="Visita sito Oficial"><a href="http://www.dipra.com.mx" target="blank"><Icon type="global" theme="outlined" /> www.dipra.com.mx</a></Popover></span>
                            </div>
                        </div>
                     </Col>
@@ -45,7 +45,7 @@ export const FooterSection=()=>{
                             </p>
                              <p>
                              ©Dipra 2018. All rights reserved <br/>
-                             <Popover title="Consulta"><a href="http://www.dipra.com.mx/avisoprivacidad.pdf" target="_blank">Aviso de Privacidad</a></Popover>
+                             <Popover title="Consulta"><a href="http://www.dipra.com.mx/avisoprivacidad.pdf" target="blank">Aviso de Privacidad</a></Popover>
                              </p>
                         </div> 
                     </Col>   
