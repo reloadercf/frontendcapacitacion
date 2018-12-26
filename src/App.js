@@ -4,11 +4,12 @@ import './App.css';
 import NavMenu from './components/navbar/NavMenu';
 import { FooterSection } from './components/footer/FooterSection';
 import { HeaderSection } from './components/header/HeaderSection';
-
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import Routes from './Routes';
 import swal from 'sweetalert';
+import {Helmet} from "react-helmet";
+import CONSTANTES from './Constantes'
 
 
 const { Header, Content, Footer } = Layout;
@@ -42,7 +43,7 @@ paso_examen=(examen)=>{
 finish_class=(clase)=>
 {
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = `http://127.0.0.1:8000/my_clases?s=${clase}`;
+    let url = `${CONSTANTES.URLAPILOCAL}/my_clases?s=${clase}`;
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -63,7 +64,7 @@ finish_class=(clase)=>
             this.setState({video_end:true})
             console.log(user_clase)
             const userToken = JSON.parse(localStorage.getItem('userToken'));
-            let url = `http://127.0.0.1:8000/apis/clasesuser/${user_clase.id}/`
+            let url = `${CONSTANTES.URLAPILOCAL}/apis/clasesuser/${user_clase.id}/`
             var request = new Request(url, {
                 method: 'PUT',
                 body: JSON.stringify(user_clase),
@@ -85,7 +86,7 @@ finish_class=(clase)=>
 
 do_evaluacion=(clase)=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = `http://127.0.0.1:8000/my_evaluations/?e=${clase}`;
+    let url = `${CONSTANTES.URLAPILOCAL}/my_evaluations/?e=${clase}`;
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -103,7 +104,7 @@ do_evaluacion=(clase)=>{
                 evaluacion['usuario']=this.state.user.id
                 evaluacion['clase']=clase
                 const userToken = JSON.parse(localStorage.getItem('userToken'));
-                let url = "http://127.0.0.1:8000/apis/evaluacion/"
+                let url = `${CONSTANTES.URLAPILOCAL}/apis/evaluacion/`
                 var request = new Request(url, {
                     method: 'POST',
                     body: JSON.stringify(evaluacion),
@@ -135,7 +136,7 @@ do_evaluacion=(clase)=>{
 
 getmodulos=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "http://127.0.0.1:8000/my_user/";
+    let url =`${CONSTANTES.URLAPILOCAL}/my_user/`;
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -181,7 +182,7 @@ checkIfuser=()=>{
 
 logIn=(user)=>{
 //console.log(user)
-let url = 'http://127.0.0.1:8000/api-token-auth/';
+let url = 'https://still-chamber-95677.herokuapp.com/api-token-auth/';
 var request = new Request(url, {
     method: 'POST',
     body: JSON.stringify(user),
@@ -236,12 +237,18 @@ logOut=()=>{
            video_end,
            permissions
         }=this.state
-    
+      
+        console.log(modulos)
     return (
+      
     <Layout>
+    <Helmet>
+         <meta charSet="utf-8" />
+                <title>DIPRA Formaci&oacute;n</title>
+            </Helmet>
         <NavMenu logged={logged} logOut={this.logOut} permissions={permissions}/>
       <Layout className="layout-videos">
-        <Header style={{ background: '#fff', height:"100px", padding: 0 }} >
+        <Header style={{ background: '#f0f2f5', height:"100px", padding: 0 }} >
             <HeaderSection/>
         </Header>
         <Content style={{ margin: '24px 16px 0',  }}>
@@ -268,7 +275,7 @@ logOut=()=>{
         </Footer>
       </Layout>
     </Layout>
-
+    
     
     );
   }

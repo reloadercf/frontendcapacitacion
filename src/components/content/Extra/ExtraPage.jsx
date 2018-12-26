@@ -17,7 +17,7 @@ class ExtraPage extends Component {
 
     getProducts=()=>{
         //const userToken = JSON.parse(localStorage.getItem('userRanchoToken'));
-        let url = 'http://127.0.0.1:8000/apis/curso_extra/';
+        let url = 'https://still-chamber-95677.herokuapp.com/apis/curso_extra/';
         var request = new Request(url, {
             method: 'GET',
             //body: data,
@@ -39,7 +39,7 @@ class ExtraPage extends Component {
 
     getCategories=()=>{
         //const userToken = JSON.parse(localStorage.getItem('userRanchoToken'));
-        let url = 'http://127.0.0.1:8000/apis/categoria/';
+        let url = 'https://still-chamber-95677.herokuapp.com/apis/categoria/';
         var request = new Request(url, {
             method: 'GET',
             //body: data,
@@ -83,7 +83,7 @@ class ExtraPage extends Component {
             })
         }
         return (
-            <div >
+            <div style={{height:"auto"}}>
             <Filters 
                 categories={categories}
                 search={search}

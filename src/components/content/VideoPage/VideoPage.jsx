@@ -21,7 +21,7 @@ export class VideoPage extends Component {
     getModulo = () => {
         //let modulos = this.props.modulos
 
-        let url = "http://127.0.0.1:8000/apis/modulo/";
+        let url = "https://still-chamber-95677.herokuapp.com/apis/modulo/";
         var request = new Request(url, {
             method: 'GET',
             headers: new Headers({'Content-Type': 'application/json'})
@@ -32,7 +32,7 @@ export class VideoPage extends Component {
 
 
                 let modulodetail=data.filter(p => {
-                   return p.id == this.props.match.params.modulo_id;
+                    return p.id == this.props.match.params.modulo_id;
                 })
 
                 let tema_modulo=modulodetail[0].modulo_tema.filter(p => {

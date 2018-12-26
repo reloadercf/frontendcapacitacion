@@ -17,7 +17,7 @@ class ProfilePage extends Component {
 
     get_myprofile=()=>{
     const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "http://127.0.0.1:8000/my_user/";
+    let url = "https://still-chamber-95677.herokuapp.com/my_user/";
     var request = new Request(url, {
         method: 'GET',
         headers:new Headers({
@@ -43,7 +43,7 @@ class ProfilePage extends Component {
         //console.log(my_profile)
         let {my_profile, modulos}=this.state
         return (
-            <div style={{height:"43vh"}}>
+            <div style={{height:"auto"}}>
                 <Row type="flex" justify="start">
                     <Col lg={24} md={24} xs={24}>
                         <Intro my_profile={my_profile}/>

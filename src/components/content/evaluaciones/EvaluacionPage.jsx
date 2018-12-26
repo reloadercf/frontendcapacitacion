@@ -19,7 +19,7 @@ class EvaluacionPage extends Component {
     get_evaluaciones=()=>{
 
         const userToken = JSON.parse(localStorage.getItem('userToken'));
-        let url = "http://127.0.0.1:8000/my_evaluations/";
+        let url = "https://still-chamber-95677.herokuapp.com/my_evaluations/";
         var request = new Request(url, {
             method: 'GET',
             headers:new Headers({

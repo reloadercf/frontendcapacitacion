@@ -6,37 +6,38 @@ import {Link} from 'react-router-dom';
 const {Sider} = Layout;
 const SubMenu = Menu.SubMenu;
 
-const Logged = ({logOut, permissions, categories}) => (
+
+const Logged = ({logOut, permissions}) => (
   <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
 
     <Menu.Item key="a" onClick={logOut}>
-      <Icon type="appstore-o" style={{
-        fontSize: "20px"
+      <Icon type="poweroff" style={{
+        fontSize: "25px"
       }}/>
-      <span className="nav-text">Cerrar Sesion</span>
+      <span className="nav-text">Cerrar sesi&oacute;n</span>
     </Menu.Item>
     <Menu.Item key="b">
       <Link to="/profile">
-        <Icon type="team" style={{
-          fontSize: "20px"
+        <Icon type="dashboard" style={{
+          fontSize: "25px"
         }}/>
-        <span className="nav-text">Modulos</span>
+        <span className="nav-text">Formaci&oacute;n</span>
       </Link>
     </Menu.Item>
     <Menu.Item key="c">
       <Link to="/evaluaciones">
-        <Icon type="profile" style={{
-          fontSize: "20px"
+        <Icon type="trophy" style={{
+          fontSize: "25px"
         }}/>
-        <span className="nav-text">Evaluaciones</span>
+        <span className="nav-text">Resultados</span>
       </Link>
     </Menu.Item>
     <Menu.Item key="d">
       <Link to="/extra">
-        <Icon type="step-forward" style={{
-          fontSize: "20px"
+        <Icon type="rocket" style={{
+          fontSize: "25px"
         }}/>
-        <span className="nav-text">Extra</span>
+        <span className="nav-text">Complementos</span>
       </Link>
     </Menu.Item>
 
@@ -60,8 +61,8 @@ const Login = ({props}) => (
   <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
     <Menu.Item key="6">
       <Link to="/login">
-        <Icon type="appstore-o"/>
-        <span className="nav-text">Iniciar Sesion</span>
+        <Icon type="play-circle"/>
+        <span className="nav-text">Iniciar sesi&oacute;n</span>
       </Link>
     </Menu.Item>
   </Menu>
@@ -70,8 +71,8 @@ const Login = ({props}) => (
 class NavMenu extends Component {
 
   state = {
-    collapsed: true,
-    categories:[]
+    collapsed: false,
+   
   }
 
   toggleCollapsed = () => {
@@ -80,27 +81,6 @@ class NavMenu extends Component {
     });
   }
 
-  componentWillMount(){
-      this.getcategories()
-  }
-
-  getcategories=()=>{
-    const userToken = JSON.parse(localStorage.getItem('userToken'));
-    let url = "http://127.0.0.1:8000/apis/categoria/";
-    var request = new Request(url, {
-        method: 'GET',
-        headers:new Headers({
-            'Authorization':'Token '+userToken,
-            'Content-Type': 'application/json'
-        }) 
-    });
-    fetch(request)
-        .then(r => r.json())
-        .then(data => {  
-              this.setState({categories:data})
-        })
-  
-  }
 
   render() {
 
@@ -111,7 +91,7 @@ class NavMenu extends Component {
         collapsedWidth="0"
         collapsed={this.state.collapsed}
         onCollapse={this.toggleCollapsed}
-        //collapsible={true}
+        collapsible={true}
         style={{
         height: '100vh',
         position: 'fixed',
@@ -119,7 +99,7 @@ class NavMenu extends Component {
       }}>
 
         <div className="logo"/> {logged
-          ? <Logged logOut={this.props.logOut} categories={this.state.categories}/>
+          ? <Logged logOut={this.props.logOut} />
           : <Login/>}
       </Sider>
     );

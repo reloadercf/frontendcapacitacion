@@ -2,6 +2,7 @@ import React from 'react'
 import {Card} from 'antd';
 import {Row, Col} from 'antd';
 import dipra from '../../../dipra.png';
+import { Icon } from 'antd';
 
 export const HeaderDetail = ({modulo}) => {
     return (
@@ -9,8 +10,8 @@ export const HeaderDetail = ({modulo}) => {
         <div className="header-detail">
             <Card >
                 <div>
-                    <h1>MODULO {modulo.id}</h1>
-                    <span>{modulo.descripcion}</span>
+                    <h1>MODULO {modulo.id} <Icon type="youtube" theme="outlined" /></h1>
+                    <span><Icon type="double-right" theme="outlined" />{modulo.descripcion}</span>
                 </div>
             </Card>
 
@@ -18,7 +19,7 @@ export const HeaderDetail = ({modulo}) => {
                 <Col lg={15} md={15} xs={24} span={8}>
                     <Card>
                         <div>
-                            <h3>¿Qué aprendere?</h3>
+                            <h3><Icon type="slack" theme="outlined" />¿Qué aprendere?</h3>
                             <hr/>
                             <div>
                                 <Row type="flex" justify="space-around">
@@ -39,8 +40,7 @@ export const HeaderDetail = ({modulo}) => {
                 </Col>
                 <Col lg={6} md={6} xs={24} span={16}>
                     <div className="div-imagen-modulo">
-                        <img
-                            src={dipra}alt=""/>
+                        {/*Imagen posterior seteada <img src={dipra}alt=""/> */}
                     </div>
 
                 </Col>

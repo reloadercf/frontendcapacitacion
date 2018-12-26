@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from 'antd';
+import { Icon } from 'antd';
 
 
 
@@ -11,8 +12,11 @@ export const Intro=({my_profile})=>{
     return(
         <Card >
         <div>
-            <h1>Bienvenido {my_profile.slug}</h1>
-            <span>Esta plataforma fue diseñada par que tu asesor financiero logres  ampliar tus conocimientos y potencializar tus ventas.</span>
+            <h1>Bienvenido <Icon type="logout" theme="outlined" /> {my_profile.slug} <Icon type="login" theme="outlined" /></h1>
+            <span><div
+                                style={{
+                               textAlign:"justify"
+                            }}> A medida que evoluciona tu carrera, necesita una solución de aprendizaje que inspire a cerrar nuevas negociaciones. Con nuestra plataforma, podras especializar tu carrera a la velocidad de la tecnología, trabajar de manera más inteligente y rápida, generando habilidades fundamentales para continuar monetizando tus conocimientos.</div></span>
         </div>
       </Card>
     )

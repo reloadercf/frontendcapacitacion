@@ -18,9 +18,9 @@ class LoginForm extends React.Component {
     render() {
         const {getFieldDecorator} = this.props.form;
         return (
-            <div style={{background:"#FFFF", borderRadius:"3em", padding: "3em"}}>
+            <div style={{background:"#fff", borderRadius:"1em", padding: "2em"}}>
                 <Form action="" onSubmit={this.handleSubmit} className="login-form">
-                    <h2 style={{textAlign:"center", letterSpacing:"3px", fontSize:"30px"}}>Iniciar Sesión</h2>
+                    <h2 style={{textAlign:"center", letterSpacing:"3px", fontSize:"30px",color:"#011528"}}>Iniciar sesión <Icon type="swap-right" theme="outlined" /><Icon type="home" theme="outlined" /></h2>
                     <FormItem>
                         {getFieldDecorator('username', {
                             rules: [
@@ -51,9 +51,8 @@ class LoginForm extends React.Component {
                         )}
                     </FormItem>
                     <FormItem>
-
-                        <Button type="primary" htmlType="submit" className="login-form-button">
-                            Log in
+                        <Button type="primary" ghost htmlType="submit" className="login-form-button">
+                            Entrar<Icon type="enter" theme="outlined" />
                         </Button>
 
                     </FormItem>

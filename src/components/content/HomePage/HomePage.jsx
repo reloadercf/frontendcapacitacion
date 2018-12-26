@@ -7,7 +7,7 @@ class HomePage extends Component {
 
         return (
             <div className="home-page">
-                <h1>PLATAFORMA INTEGRAL DE CAPACITACIÓN DIPRA</h1>
+                <h1>DESARROLLO PROFESIONAL</h1>
                 <SliderComponent/>
                 <Row type="flex" justify="space-around">
                     <Col lg={8} md={8} xs={24}>
@@ -20,16 +20,16 @@ class HomePage extends Component {
                             }}>
                                 <h2>
                                     <Icon
-                                        type="star"
+                                        type="bar-chart"
                                         style={{
                                         fontSize: "30px",
-                                        color: '#1e2022',
+                                        color: '#ffffff',
                                         marginRight: "5px"
-                                    }}/>Objetivo
+                                    }}/>Profesionales
                                 </h2>
                             </div>
 
-                            <p>Esta plataforma fue diseñada para que tu</p>
+                            <p>Nuestro equipo de formadores son expertos y adaptan los contenidos de acuerdo a tu nivel de aprendizaje y los presentan en breves y prácticos vídeos.</p>
                         </div>
                     </Col>
                     <Col lg={8} md={8} xs={24}>
@@ -42,15 +42,15 @@ class HomePage extends Component {
                             }}>
                                 <h2>
                                     <Icon
-                                        type="like"
+                                        type="up-circle"
                                         style={{
                                         fontSize: "30px",
-                                        color: '#1e2022',
+                                        color: '#ffffff',
                                         marginRight: "5px"
-                                    }}/>Objetivo
+                                    }}/>Alta disponibilidad
                                 </h2>
                             </div>
-                            <p>adadasd</p>
+                            <p>Aprende donde y cuando quieras:En todo momento esta disponible el acceso a la plataforma donde podras aprender y adquirir conocimiento de forma continua. Con las apps gratuitas que DIPRA desarrollo para ti disponibles para iOS, Android, </p>
                         </div>
                     </Col>
                     <Col lg={8} md={8} xs={24}>
@@ -63,15 +63,15 @@ class HomePage extends Component {
                             }}>
                                 <h2>
                                     <Icon
-                                        type="star"
+                                        type="tag"
                                         style={{
                                         fontSize: "30px",
-                                        color: '#1e2022',
+                                        color: '#ffffff',
                                         marginRight: "5px"
-                                    }}/>Objetivo
+                                    }}/>Alto Rendimiento
                                 </h2>
                             </div>
-                            <p>adadasd</p>
+                            <p>Mantenerse al día con la tecnología tomando cursos, evaluaciones y herramientas dirigidas por expertos que te ayudarán a desarrollar las habilidades que necesitas, cuando las necesitas. </p>
                         </div>
                     </Col>
 
